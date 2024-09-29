@@ -1,0 +1,13 @@
+/* CSS */
+@media (max-width: 768px) {
+    .sidebarMobileWidth {
+      width: 80% !important; /* Width for screens smaller than 768px (mobile/tablet) */
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .sidebarMobileWidth {
+      width: 20rem !important; /* Width for larger screens (desktop) */
+    }
+  }
+  
