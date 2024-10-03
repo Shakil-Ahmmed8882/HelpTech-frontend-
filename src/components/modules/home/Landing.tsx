@@ -97,22 +97,18 @@ export function Post({ post }: { post: IPost }) {
   return (
     <Card className="shadow-none bg-transparent p-0 pb-20 ">
       <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
-        <Avatar
-          className="w-8 h-8"
-          src={author?.profilePhoto}
-        ></Avatar>
+        <Avatar className="w-8 h-8" src={author?.profilePhoto}></Avatar>
         <div className="flex flex-col">
           <h2 className="text-md">{author?.username}</h2>
         </div>
       </CardHeader>
       <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
         <div className="space-y-4">
-          <h1 className="text-2xl font-bold">
-            {title}
-          </h1>
-          <div className="text-default-500 text-lg">
-           {content} 
-          </div>
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <div
+            className="text-default-500 text-lg"
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></div>
 
           <section className="flex justify-between items-center">
             <p className="text-sm text-default-500">1d ago</p>
