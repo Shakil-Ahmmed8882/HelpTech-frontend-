@@ -38,6 +38,9 @@ export default function NavbarDropdown() {
         <Avatar size="sm" className="cursor-pointer" src={user?.profilePhoto} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
+        <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard":"/admin-dashboard"}`)}>
+          Dashboard
+        </DropdownItem>
         <DropdownItem onClick={() => handleNavigation("/profile")}>
           Profile
         </DropdownItem>

@@ -80,6 +80,7 @@ import { Skeleton } from "@nextui-org/skeleton";
 
 export function Post({ post }: { post: IPost }) {
   const {
+    _id,
     title,
     category,
     author,
@@ -95,6 +96,8 @@ export function Post({ post }: { post: IPost }) {
   } = post || {};
 
   return (
+
+    <Link href={`/post/${_id}`}>
     <Card className="shadow-none bg-transparent p-0 pb-20 ">
       <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
         <Avatar className="w-8 h-8" src={author?.profilePhoto}></Avatar>
@@ -103,7 +106,7 @@ export function Post({ post }: { post: IPost }) {
         </div>
       </CardHeader>
       <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
-        <div className="space-y-4">
+        <div className="space-y-4 md:w-2/3">
           <h1 className="text-2xl font-bold">{title}</h1>
           <div
             className="text-default-500 text-lg"
@@ -143,9 +146,9 @@ export function Post({ post }: { post: IPost }) {
             </div>
           </div>
         </div>
-        <figure>
+        <figure className="md:w-1/3">
           <Image
-            width={500}
+            width={200}
             height={500}
             className="rounded w-full pb-5 sm:pb-0"
             alt="blog"
@@ -154,6 +157,7 @@ export function Post({ post }: { post: IPost }) {
         </figure>
       </section>
     </Card>
+    </Link>
   );
 }
 

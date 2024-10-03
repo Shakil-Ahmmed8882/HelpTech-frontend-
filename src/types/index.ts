@@ -56,7 +56,7 @@ export interface ICategory {
 export interface IUser {
   _id: string;
   userId?: string;
-  name: string;
+  username: string;
   role: string;
   email: string;
   status?: string;
@@ -91,4 +91,29 @@ export interface ISearchResults {
   title: string
   description: string
   thumbnail: string
+}
+
+
+
+
+export interface IComment {
+  _id: string
+  post: Post
+  user: User
+  comment: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface Post {
+  _id: string
+  title: string
+  content: string
+}
+
+export interface User {
+  _id: string
+  username: string
+  email: string
+  profilePhoto: string
 }

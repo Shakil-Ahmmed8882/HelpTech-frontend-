@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { createPost, getAllPosts } from "../services/post"
+import { createPost, getAllCommmentsOnSiglePost, getAllPosts, getSinglePost } from "../services/post"
 import { toast } from "sonner"
 
 
@@ -26,3 +26,23 @@ export const useGetAllPosts = () => {
     })
 
 }
+
+export const useGetSinglePost = (id: string) => {
+  return useQuery({
+    queryKey: ["GET_SINGLE_POST", id],
+    queryFn: async ({ queryKey }) => {
+      const [, postId] = queryKey;
+      return await getSinglePost(postId);
+    },
+  });
+};
+
+export const useGetAllCommentsOnSinglePost = (id: string) => {
+  return useQuery({
+    queryKey: ["SINGLE_POST_COMMENT", id],
+    queryFn: async ({ queryKey }) => {
+      const [, postId] = queryKey;
+      return await getAllCommmentsOnSiglePost(postId);
+    },
+  });
+};
