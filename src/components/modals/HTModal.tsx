@@ -4,7 +4,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@nextui-org/modal";
 
@@ -17,7 +16,7 @@ interface Iprops {
   buttonClassName?: string;
 }
 
-export const FXModal = ({
+export const HTModal = ({
   buttonText,
   title,
   children,
@@ -28,7 +27,7 @@ export const FXModal = ({
   return (
     <>
       <Button className={buttonClassName} onPress={onOpen}>{buttonText}</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4 overflow-auto !min-h-screen">
         <ModalContent>
           {(onClose) => (
             <>

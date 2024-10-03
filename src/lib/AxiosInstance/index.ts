@@ -1,3 +1,6 @@
+"use server"
+
+
 import envConfig from "@/src/config/envConfig";
 import { getNewAccessToken } from "@/src/services/authService";
 

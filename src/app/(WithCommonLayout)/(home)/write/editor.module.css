@@ -1,0 +1,13 @@
+/* Assuming you have a global CSS file or a CSS module */
+.jodit .jodit_wysiwyg {
+    background-color: transparent !important; /* Make the editor body transparent */
+    color: inherit; /* Ensure text color is inherited */
+}
+
+.jodit .jodit_toolbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Make the toolbar semi-transparent */
+}
+
+.jodit .jodit_toolbar button {
+    color: #000; /* Set button color for visibility */
+}

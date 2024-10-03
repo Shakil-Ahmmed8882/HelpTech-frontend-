@@ -7,7 +7,7 @@ export const useCreatePost = () => {
 
     return useMutation({
         mutationKey: ["CREATE_POST"],
-        mutationFn: async(postData:FormData) => await createPost(postData),
+        mutationFn: async(postData:any) => await createPost(postData),
         onSuccess: ()=>{
             toast.success("Post is created successully")
         },

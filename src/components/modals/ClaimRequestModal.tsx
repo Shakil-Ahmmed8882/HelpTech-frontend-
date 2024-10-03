@@ -2,7 +2,7 @@
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import HTForm from "../form/HTForm";
-import { FXModal } from "./HTModal";
+import { HTModal } from "./HTModal";
 import HTInput from "../form/HTInput";
 import HTTextarea from "../form/HTTextarea";
 import { Button } from "@nextui-org/button";
@@ -31,7 +31,7 @@ const ClaimRequestModal = ({ id, questions }: Iprops) => {
     handleClaimRequest(claimRequestData);
   };
   return (
-    <FXModal
+    <HTModal
       buttonClassName="flex-1 w-full"
       buttonText="Claim  Request"
       title="Claim Request"
@@ -49,7 +49,7 @@ const ClaimRequestModal = ({ id, questions }: Iprops) => {
           {claimReqIsPending? "Sending..": "Send"}
         </Button>
       </HTForm>
-    </FXModal>
+    </HTModal>
   );
 };
 

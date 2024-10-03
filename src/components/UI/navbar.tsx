@@ -18,13 +18,14 @@ import { ThemeSwitch } from "@/src/components/UI/theme-switch";
 import { Logo } from "@/src/components/icons";
 import NavbarDropdown from "./NavbarDropdown";
 import { useUser } from "@/src/context/user.provider";
+import { NotificationIcon, WriteIcon } from "@/src/assets/icons";
 
 export const Navbar =  () => {
   const { user } = useUser();
   
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky" className="!px-0">
+    <NextUINavbar maxWidth="xl" position="sticky" className="!px-0 py-3">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit ">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -54,7 +55,9 @@ export const Navbar =  () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden sm:flex gap-2">
+        <NavbarItem className="hidden sm:flex gap-4 items-center">
+          <Link href="/write" className="text-default-600"><WriteIcon/></Link>
+          <NotificationIcon/>
           <ThemeSwitch />
         </NavbarItem>
         {user ? (

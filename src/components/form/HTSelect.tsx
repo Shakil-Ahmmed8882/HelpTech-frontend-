@@ -27,7 +27,7 @@ const HTSelect = ({
         {...register(name)}
         label={label}
         variant={variant}
-        className="max-w-xs"
+        className=""
       >
         {options.map((option: IItem) => (
           <SelectItem key={option.key}>{option.label}</SelectItem>

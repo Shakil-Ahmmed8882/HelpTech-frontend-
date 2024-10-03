@@ -35,6 +35,7 @@ export interface ICategory {
 
 export interface IUser {
   _id: string;
+  userId?: string;
   name: string;
   role: string;
   email: string;
@@ -53,6 +54,7 @@ export interface IInput {
   type?: string;
   label: string;
   name: string;
+  className?: string;
   disabled?: boolean;
 }
 

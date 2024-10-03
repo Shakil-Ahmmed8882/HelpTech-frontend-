@@ -1,38 +1,15 @@
 "use server";
 
-import envConfig from "@/src/config/envConfig";
-import NexiosInstance from "@/src/lib/nexiosInstance";
-import { revalidateTag } from "next/cache";
+import { FieldValues } from "react-hook-form";
+import axiosInstance from "@/src/lib/AxiosInstance";
 
-export const createPost = async (formData: FormData): Promise<any> => {
+export const createPost = async (postData:any) => {
   try {
-    const { data } = await NexiosInstance.post("/items", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    revalidateTag("posts");
-
+    const { data } = await axiosInstance.post("/posts", postData);
     return data;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to create post");
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 
-export const getPost = async (postId: string) => {
-  let fetchOptions = {};
 
-  fetchOptions = {
-    cache: "no-store",
-  };
-
-  const res = await fetch(`${envConfig.baseApi}/items/${postId}`, fetchOptions);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-};

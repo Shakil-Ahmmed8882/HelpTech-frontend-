@@ -8,14 +8,18 @@ interface IProps extends IInput {}
 
 export default function HTInput({
   variant = "bordered",
+  className = "",
   size = "md",
   required = false,
   type = "text",
   label,
   name,
+  ...props
 }: IProps) {
-  
-  const {register,formState: { errors }} = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Input
@@ -27,6 +31,7 @@ export default function HTInput({
       required={required}
       type={type}
       label={label}
+      className={`${className}`}
     />
   );
 }
