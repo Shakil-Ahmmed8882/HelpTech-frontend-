@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { addComment, getAllCommmentsOnSiglePost } from "../services/comments";
 import { toast } from "sonner";
+import { revalidateTag } from "next/cache";
 
 export const useGetAllCommentsOnSinglePost = (id: string) => {
     return useQuery({
@@ -18,6 +19,7 @@ export const useGetAllCommentsOnSinglePost = (id: string) => {
         mutationKey: ["ADD_COMMENT"],
         mutationFn: async(commentData:any) => await addComment(commentData),
         onSuccess: ()=>{
+            revalidateTag("SINGLE_POST_COMMENT")
             toast.success("Comment is added successully")
         },
         onError: (error)=>{

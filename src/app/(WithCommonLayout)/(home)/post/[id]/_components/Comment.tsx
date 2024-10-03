@@ -9,7 +9,7 @@ import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader } from "@nextui-org/card";
 import { Textarea } from "@nextui-org/input";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 type IProps = {
   postId: string;
@@ -22,37 +22,36 @@ export default function Comment({
   postId,
   showComment,
 }: IProps) {
-  const { data } = useGetAllCommentsOnSinglePost(postId);
-  const { mutate:AddCommment } = useAddComment();
+  const { data, refetch } = useGetAllCommentsOnSinglePost(postId); // Get refetch method from hook
+  const { mutate: addComment } = useAddComment();
   const { user } = useUser();
   const postComments = data?.data || [];
   const commentSectionRef = useRef(null);
   useClickOutside(commentSectionRef, () => setShowComment(false));
 
+  const [commentText, setCommentText] = useState("");
 
-
-   // Handle submitting the comment
-   const [commentText, setCommentText] = useState("");
-
-   const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formattedComment = {
       post: postId,
       comment: commentText,
     };
-    
-    AddCommment(formattedComment)
 
-    // Clear the textarea after submit
-    setCommentText("");
+    // Add comment and refetch comments afterward
+    await addComment(formattedComment);
+    setCommentText(""); // Clear the textarea after submit
+
+    // Refetch comments to get the updated list
+    refetch();
   };
 
   return (
     <Card
       ref={commentSectionRef}
-      className={`${showComment ? " z-[99] opacity-100 translate-x-0 visible" : "z-[-99] opacity-0 translate-x-80 invisible"} fixed top-0 right-0 h-screen p-3 w-[400px] shadow-lg transition-all duration-300`}
+      className={`${showComment ? " z-[99] opacity-100 translate-x-0 visible" : "z-[-99] opacity-0 translate-x-80 invisible"} fixed top-0 right-0 h-screen p-3 w-[400px] overflow-auto shadow-lg transition-all duration-300`}
     >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <h2 className="text-xl font-bold">Responses (9)</h2>
+        <h2 className="text-xl font-bold">Responses ({postComments.length})</h2>
         <div onClick={() => setShowComment(false)} className="flex space-x-2">
           <div className="h-5 w-5 text-gray-500" />
           <CloseIcon />
@@ -74,17 +73,17 @@ export default function Comment({
             <div className="flex items-center justify-between">
               <div className="flex space-x-2"></div>
               <div className="flex space-x-2">
-                <Button onClick={() =>  setCommentText("")} variant="ghost">Cancel</Button>
-                <Button onClick={() =>  handleSubmit()} className="bg-primaryColor text-[#fff]">Respond</Button>
+                <Button onClick={() => setCommentText("")} variant="ghost">Cancel</Button>
+                <Button onClick={handleSubmit} className="bg-primaryColor text-[#fff]">Respond</Button>
               </div>
             </div>
           </div>
         </div>
 
         <div className="pt-11">
-          {postComments?.length > 0 &&
-            postComments?.map((comment:IComment) => (
-              <IndividualComment {...{ comment }} />
+          {postComments.length > 0 &&
+            postComments.map((comment: IComment) => (
+              <IndividualComment key={comment?._id} comment={comment} />
             ))}
         </div>
       </div>
@@ -93,8 +92,6 @@ export default function Comment({
 }
 
 const IndividualComment = ({ comment }: { comment: IComment }) => {
-
-
   return (
     <div className="space-y-2 pt-5">
       <div className="flex items-start space-x-4">
@@ -106,7 +103,7 @@ const IndividualComment = ({ comment }: { comment: IComment }) => {
               <p className="text-sm text-default-500">3 days ago</p>
             </div>
           </div>
-          <p className="text-sm pt-2 text-default-500 ">{comment?.comment}</p>
+          <p className="text-sm pt-2 text-default-500">{comment?.comment}</p>
           <div className="flex items-center space-x-4 pt-8 justify-end w-full">
             <div className="flex items-center space-x-1">
               <span className="text-sm font-medium">7</span>
