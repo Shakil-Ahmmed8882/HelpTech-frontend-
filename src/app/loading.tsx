@@ -1,7 +1,7 @@
 export default function loading() {
   return (
-    <div>
-      <h1> Global Loading.... </h1>
+    <div className="h-screen flex items-center justify-center w-full">
+    <p>Loading..</p>
     </div>
   );
 }

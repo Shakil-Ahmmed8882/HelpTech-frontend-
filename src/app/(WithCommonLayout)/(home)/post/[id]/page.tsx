@@ -12,10 +12,12 @@ import { useGetSinglePost } from "@/src/hooks/post.hook";
 import Image from "next/image";
 import React, { useState } from "react";
 import Comment from "./_components/Comment";
+import PostSkeleton from "./_components/PostSkeleton";
+import Container from "@/src/components/UI/Container";
 
 const BlogPost = ({ params }: { params: { id: string } }) => {
   const postId = params?.id;
-  const { data } = useGetSinglePost(postId);
+  const { data, isLoading } = useGetSinglePost(postId);
   const [showComment, setShowComment] = useState(false);
 
   const {
@@ -34,7 +36,14 @@ const BlogPost = ({ params }: { params: { id: string } }) => {
     setShowComment((prev) => !prev);
   };
 
-  return (
+
+
+
+  return <Container>
+  
+    {
+        isLoading? <PostSkeleton/>:<>
+
     <div className="max-w-3xl mx-auto p-4 pt-20 text-default-900">
       {/* Title Section */}
       <div className="space-y-4 mb-6">
@@ -139,7 +148,10 @@ const BlogPost = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
     </div>
-  );
+
+        </>
+    }
+  </Container>
 };
 
 export default BlogPost;

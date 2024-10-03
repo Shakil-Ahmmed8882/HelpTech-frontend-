@@ -10,6 +10,7 @@ import { Button } from "@nextui-org/button";
 import { Card, CardHeader } from "@nextui-org/card";
 import { Textarea } from "@nextui-org/input";
 import { useRef, useState, useEffect } from "react";
+import CommentSkeleton from "./CommentSkeleton";
 
 type IProps = {
   postId: string;
@@ -22,7 +23,7 @@ export default function Comment({
   postId,
   showComment,
 }: IProps) {
-  const { data, refetch } = useGetAllCommentsOnSinglePost(postId); // Get refetch method from hook
+  const { data, refetch,isLoading } = useGetAllCommentsOnSinglePost(postId); // Get refetch method from hook
   const { mutate: addComment } = useAddComment();
   const { user } = useUser();
   const postComments = data?.data || [];
@@ -45,12 +46,23 @@ export default function Comment({
     refetch();
   };
 
+
+  
   return (
+    
     <Card
       ref={commentSectionRef}
       className={`${showComment ? " z-[99] opacity-100 translate-x-0 visible" : "z-[-99] opacity-0 translate-x-80 invisible"} fixed top-0 right-0 h-screen p-3 w-[400px] overflow-auto shadow-lg transition-all duration-300`}
     >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      {
+        isLoading ? <CommentSkeleton/>: <>
+        
+        
+        
+        
+        
+        
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <h2 className="text-xl font-bold">Responses ({postComments.length})</h2>
         <div onClick={() => setShowComment(false)} className="flex space-x-2">
           <div className="h-5 w-5 text-gray-500" />
@@ -87,6 +99,13 @@ export default function Comment({
             ))}
         </div>
       </div>
+        
+        
+        
+        
+        
+        </>
+      }
     </Card>
   );
 }

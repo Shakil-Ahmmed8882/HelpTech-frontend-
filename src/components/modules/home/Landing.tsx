@@ -46,30 +46,41 @@ export default function Landing() {
     // router.push(`/found-items?query=${queryString}`);
   };
 
-  const { data } = useGetAllPosts();
+  const { data, isLoading } = useGetAllPosts();
   const allPosts = data?.data;
 
-  return (
-    <div>
-      <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
-        <section className="md:w-[65%] relative min-h-screen pt-20">
-          {allPosts?.map((post: IPost) => <Post key={post._id} post={post} />)}
-        </section>
-        <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0 self-start">
-          <div className="py-2">
-            <h2 className="text-3xl font-bold">Trending</h2>
-            <p className="pt-3 text-default-700">
-              {" "}
-              adipisicing elit. Velit nulla excepturi illum a reiciendis. Neque
-              quia odio ipsam? Porro repellendus expedita voluptates quia quod
-              omnis aspernatur mollitia animi accusantium quo?
-            </p>
 
-            <StaffPicks />
+  return (
+    <>
+      {isLoading ? (
+        <PostHorizontalSkeleton />
+      ) : (
+        <>
+          <div>
+            <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
+              <section className="md:w-[65%] relative min-h-screen pt-20">
+                {allPosts?.map((post: IPost) => (
+                  <Post key={post._id} post={post} />
+                ))}
+              </section>
+              <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0 self-start">
+                <div className="py-2">
+                  <h2 className="text-3xl font-bold">Trending</h2>
+                  <p className="pt-3 text-default-700">
+                    {" "}
+                    adipisicing elit. Velit nulla excepturi illum a reiciendis.
+                    Neque quia odio ipsam? Porro repellendus expedita voluptates
+                    quia quod omnis aspernatur mollitia animi accusantium quo?
+                  </p>
+
+                  <StaffPicks />
+                </div>
+              </aside>
+            </main>
           </div>
-        </aside>
-      </main>
-    </div>
+        </>
+      )}
+    </>
   );
 }
 
@@ -96,67 +107,66 @@ export function Post({ post }: { post: IPost }) {
   } = post || {};
 
   return (
-
     <Link href={`/post/${_id}`}>
-    <Card className="shadow-none bg-transparent p-0 pb-20 ">
-      <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
-        <Avatar className="w-8 h-8" src={author?.profilePhoto}></Avatar>
-        <div className="flex flex-col">
-          <h2 className="text-md">{author?.username}</h2>
-        </div>
-      </CardHeader>
-      <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
-        <div className="space-y-4 md:w-2/3">
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <div
-            className="text-default-500 text-lg"
-            dangerouslySetInnerHTML={{ __html: content }}
-          ></div>
+      <Card className="shadow-none bg-transparent p-0 pb-20 ">
+        <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
+          <Avatar className="w-8 h-8" src={author?.profilePhoto}></Avatar>
+          <div className="flex flex-col">
+            <h2 className="text-md">{author?.username}</h2>
+          </div>
+        </CardHeader>
+        <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
+          <div className="space-y-4 md:w-2/3">
+            <h1 className="text-2xl font-bold">{title}</h1>
+            <div
+              className="text-default-500 text-lg"
+              dangerouslySetInnerHTML={{ __html: content }}
+            ></div>
 
-          <section className="flex justify-between items-center">
-            <p className="text-sm text-default-500">1d ago</p>
-            <div className="flex gap-2 pt-4">
-              <div className="flex text-default-500 cursor-pointer hover:text-white transition500">
-                <Bookmark className="w-4 h-4 text-default-50" />
-                <span className="sr-only">Bookmark</span>
+            <section className="flex justify-between items-center">
+              <p className="text-sm text-default-500">1d ago</p>
+              <div className="flex gap-2 pt-4">
+                <div className="flex text-default-500 cursor-pointer hover:text-white transition500">
+                  <Bookmark className="w-4 h-4 text-default-50" />
+                  <span className="sr-only">Bookmark</span>
+                </div>
+                <div className="text-default-500 cursor-pointer hover:text-white transition500">
+                  <MoreIcon className="w-4 h-4" />
+                  <span className="sr-only">More options</span>
+                </div>
               </div>
-              <div className="text-default-500 cursor-pointer hover:text-white transition500">
-                <MoreIcon className="w-4 h-4" />
-                <span className="sr-only">More options</span>
-              </div>
-            </div>
-          </section>
+            </section>
 
-          <div className="flex  gap-6 pt-4">
-            <div className="flex items-center gap-3 text-default-500 cursor-pointer hover:text-white transition500">
-              <EyeIcon className="w-4 h-4" />
-              <span>101</span>
-            </div>
-            <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
-              <MessageCircle className="w-4 h-4" />
-              <span>{comments}</span>
-            </div>
-            <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
-              <LikeIcon className="w-4 h-4" />
-              <span>{upvotes}</span>
-            </div>
-            <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
-              <DislikeIcon className="w-4 h-4" />
-              <span>{downvotes}</span>
+            <div className="flex  gap-6 pt-4">
+              <div className="flex items-center gap-3 text-default-500 cursor-pointer hover:text-white transition500">
+                <EyeIcon className="w-4 h-4" />
+                <span>101</span>
+              </div>
+              <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
+                <MessageCircle className="w-4 h-4" />
+                <span>{comments}</span>
+              </div>
+              <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
+                <LikeIcon className="w-4 h-4" />
+                <span>{upvotes}</span>
+              </div>
+              <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
+                <DislikeIcon className="w-4 h-4" />
+                <span>{downvotes}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <figure className="md:w-1/3">
-          <Image
-            width={200}
-            height={500}
-            className="rounded w-full pb-5 sm:pb-0"
-            alt="blog"
-            src={images[0]}
-          />
-        </figure>
-      </section>
-    </Card>
+          <figure className="md:w-1/3">
+            <Image
+              width={200}
+              height={500}
+              className="rounded w-full pb-5 sm:pb-0"
+              alt="blog"
+              src={images[0]}
+            />
+          </figure>
+        </section>
+      </Card>
     </Link>
   );
 }
@@ -165,6 +175,7 @@ import React from "react";
 import Link from "next/link";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
+import { PostHorizontalSkeleton } from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/PostSkeleton";
 
 const posts = [
   { title: "Top 10 JavaScript Tips", views: 25000, url: "#" },
