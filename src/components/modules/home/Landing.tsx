@@ -7,67 +7,55 @@ import {
   LikeIcon,
   MessageCircle,
   MoreIcon,
-  SearchIcon,
 } from "../../icons";
-import { FieldValues, SubmitHandler, useForm, useWatch } from "react-hook-form";
-import { useSearchItems } from "@/src/hooks/search.hook";
-import { useEffect, useState } from "react";
-import { ISearchResults } from "@/src/types";
+import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/button";
-import { useRouter } from "next/navigation";
 
 export default function Landing() {
   const { register, handleSubmit, watch } = useForm();
   const searchTerm = watch("search");
-  const {
-    mutate: handleSearchItems,
-    data,
-    isPending,
-    isSuccess,
-  } = useSearchItems();
-  const [searchResults, setSearchResults] = useState<ISearchResults[] | []>([]);
-  const router = useRouter();
+  // const {
+  //   mutate: handleSearchItems,
+  //   data,
+  //   isPending,
+  //   isSuccess,
+  // } = useSearchItems();
+  // const [searchResults, setSearchResults] = useState<ISearchResults[] | []>([]);
+  // const router = useRouter();
 
-  useEffect(() => {
-    handleSearchItems(searchTerm);
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   handleSearchItems(searchTerm);
+  // }, [searchTerm]);
 
-  useEffect(() => {
-    if (!searchTerm) {
-      setSearchResults([]);
-    }
+  // useEffect(() => {
+  //   if (!searchTerm) {
+  //     setSearchResults([]);
+  //   }
 
-    if (!isPending && isSuccess && data && searchTerm) {
-      setSearchResults(data?.data?.hits ?? []);
-    }
-  }, [isPending, isSuccess, data, searchTerm]);
+  //   if (!isPending && isSuccess && data && searchTerm) {
+  //     setSearchResults(data?.data?.hits ?? []);
+  //   }
+  // }, [isPending, isSuccess, data, searchTerm]);
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-  };
+  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  //   console.log(data);
+  // };
 
   const handleSeeAll = (searchTerm: string) => {
     const queryString = searchTerm.trim().split(" ").join("+");
-    router.push(`/found-items?query=${queryString}`);
+    // router.push(`/found-items?query=${queryString}`);
   };
+
+  const { data } = useGetAllPosts();
+  const allPosts = data?.data;
 
   return (
     <div>
-      <main className="md:flex max-w-6xl mx-auto w-full gap-2 relative">
+      <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
         <section className="md:w-[65%] relative min-h-screen pt-20">
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {allPosts?.map((post: IPost) => <Post key={post._id} post={post} />)}
         </section>
-        <aside className="hidden md:block border-l border-default-100 p-2 w-[35%] min-h-screen sticky top-0 self-start">
+        <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0 self-start">
           <div className="py-2">
             <h2 className="text-3xl font-bold">Trending</h2>
             <p className="pt-3 text-default-700">
@@ -82,55 +70,6 @@ export default function Landing() {
         </aside>
       </main>
     </div>
-
-    // <div className="h-[calc(100vh-64px)] bg-[url('/glass.jpg')] bg-cover bg-center">
-    //   <div className="pt-32 max-w-xl flex-1 mx-auto">
-    //     <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
-    //       <Input
-    //         {...register("search")}
-    //         aria-label="Search"
-    //         classNames={{
-    //           inputWrapper: "bg-default-100",
-    //           input: "text-sm",
-    //         }}
-    //         placeholder="Search..."
-    //         size="lg"
-    //         startContent={
-    //           <SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
-    //         }
-    //         type="text"
-    //       />
-    //     </form>
-
-    //     {searchResults?.length > 0 && (
-    //       <div className="bg-default-50 p-3 pb-8">
-    //         {searchResults.map((item) => (
-    //           <div
-    //             key={item.id}
-    //             className=" bg-default-100 mt-4 p-3 rounded-lg w-full"
-    //           >
-    //             <div className="flex gap-5 ">
-    //               <img
-    //                 src={item.thumbnail}
-    //                 alt=""
-    //                 className="size-16 rounded-lg"
-    //               />
-    //               <article>
-    //                 <h1> {item.title}</h1>
-    //                 This is my project
-    //                 <p> {item.description}</p>
-    //               </article>
-    //             </div>
-    //           </div>
-    //         ))}
-
-    //         <div className="text-center mt-5">
-    //           <Button onClick={() => handleSeeAll(searchTerm)}>see all</Button>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </div>
-    // </div>
   );
 }
 
@@ -139,28 +78,41 @@ import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 import { Skeleton } from "@nextui-org/skeleton";
 
-export function Post() {
+export function Post({ post }: { post: IPost }) {
+  const {
+    title,
+    category,
+    author,
+    content,
+    upvotes,
+    downvotes,
+    isPremium,
+    views,
+    pdfVersion,
+    isDeleted,
+    images,
+    comments,
+  } = post || {};
+
   return (
     <Card className="shadow-none bg-transparent p-0 pb-20 ">
       <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
         <Avatar
           className="w-8 h-8"
-          src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
+          src={author?.profilePhoto}
         ></Avatar>
         <div className="flex flex-col">
-          <h2 className="text-md">Sagar Verma</h2>
+          <h2 className="text-md">{author?.username}</h2>
         </div>
       </CardHeader>
       <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
         <div className="space-y-4">
           <h1 className="text-2xl font-bold">
-            Introduction to React.js: The Go-To Library for Modern Web
-            Development
+            {title}
           </h1>
-          <p className="text-default-500 text-lg">
-            In today's fast-paced world of web development, building efficient,
-            scalable, and dynamic applications is critical. React.js...
-          </p>
+          <div className="text-default-500 text-lg">
+           {content} 
+          </div>
 
           <section className="flex justify-between items-center">
             <p className="text-sm text-default-500">1d ago</p>
@@ -183,15 +135,15 @@ export function Post() {
             </div>
             <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
               <MessageCircle className="w-4 h-4" />
-              <span>2</span>
+              <span>{comments}</span>
             </div>
             <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
               <LikeIcon className="w-4 h-4" />
-              <span>2</span>
+              <span>{upvotes}</span>
             </div>
             <div className="flex items-center gap-1 text-default-500 cursor-pointer hover:text-white transition500">
               <DislikeIcon className="w-4 h-4" />
-              <span>2</span>
+              <span>{downvotes}</span>
             </div>
           </div>
         </div>
@@ -201,9 +153,7 @@ export function Post() {
             height={500}
             className="rounded w-full pb-5 sm:pb-0"
             alt="blog"
-            src={
-              "https://ebsedu.org/wp-content/uploads/elementor/thumbs/AI-Artificial-Intelligence-What-it-is-and-why-it-matters-qb1o8gpaeu2d4z5h27m45d99w1tmlkjwinh4wq1izi.jpg"
-            }
+            src={images[0]}
           />
         </figure>
       </section>
@@ -213,6 +163,8 @@ export function Post() {
 
 import React from "react";
 import Link from "next/link";
+import { useGetAllPosts } from "@/src/hooks/post.hook";
+import { IPost } from "@/src/types";
 
 const posts = [
   { title: "Top 10 JavaScript Tips", views: 25000, url: "#" },
@@ -225,7 +177,9 @@ const StaffPicks = () => {
   return (
     <div className="w-full max-w-xs">
       {/* Staff Picks Heading */}
-      <h3 className="text-2xl font-semibold text-default-800 mb-6 pt-8">Popular posts 🌟</h3>
+      <h3 className="text-2xl font-semibold text-default-800 mb-6 pt-8">
+        Popular posts 🌟
+      </h3>
 
       {/* First Post */}
       <div className="flex items-start mb-8">
@@ -237,10 +191,13 @@ const StaffPicks = () => {
         </div>
         <div>
           <p className="text-sm">
-            <span className="font-bold">Neela</span> 🌙 🔮 in
-            Psychology of Workplaces
+            <span className="font-bold">Neela</span> 🌙 🔮 in Psychology of
+            Workplaces
           </p>
-          <Link href="#" className="text-default-500 hover:underline pt-3 block ">
+          <Link
+            href="#"
+            className="text-default-500 hover:underline pt-3 block "
+          >
             How I Burned My Resume and Built a New Career
           </Link>
         </div>
@@ -255,16 +212,17 @@ const StaffPicks = () => {
         </div>
         <div>
           <p className="text-sm">
-            <span className="font-bold ">Alisa Wolf</span> 🌙 🔮  in Human Parts
+            <span className="font-bold ">Alisa Wolf</span> 🌙 🔮 in Human Parts
           </p>
-          <Link href="#" className="text-default-500 hover:underline pt-3 block ">
-          Why I Stopped Boycotting Businesses and Cutting People Off Because
-          of Their Political Views
+          <Link
+            href="#"
+            className="text-default-500 hover:underline pt-3 block "
+          >
+            Why I Stopped Boycotting Businesses and Cutting People Off Because
+            of Their Political Views
           </Link>
         </div>
       </div>
-
-   
 
       <div className="flex items-start mb-8">
         <div>
@@ -275,18 +233,22 @@ const StaffPicks = () => {
         </div>
         <div>
           <p className="text-sm">
-            <span className="font-bold ">The Medium Newsletter</span> 🌙 🔮  
+            <span className="font-bold ">The Medium Newsletter</span> 🌙 🔮
           </p>
-          <Link href="#" className=" text-default-500 hover:underline pt-3 block ">
-          “You don’t own a community; you influence, co-create and curate it.”
+          <Link
+            href="#"
+            className=" text-default-500 hover:underline pt-3 block "
+          >
+            “You don’t own a community; you influence, co-create and curate it.”
           </Link>
         </div>
       </div>
 
-   
-
       {/* Full List Link */}
-      <Link href="#" className="text-green-600 font-medium pl-11 block hover:underline">
+      <Link
+        href="#"
+        className="text-green-600 font-medium pl-11 block hover:underline"
+      >
         See more..
       </Link>
 
@@ -371,9 +333,24 @@ const StaffPicks = () => {
                 Trending Tech Topics
               </h2>
               <ul className="space-y-4">
-                <Link className="text-default-500 pt-1 list-disc list block text-lg hover:underline" href={'/'}>5 VSCode Extensions Every Developer Should Use</Link>
-                <Link className="text-default-500 pt-1 list-disc list block text-lg hover:underline" href={'/'}>Web3: The Rise of Decentralized Web</Link>
-                <Link className="text-default-500 pt-1 list-disc list block text-lg hover:underline" href={'/'}>Best Practices for React State Management in 2024</Link>
+                <Link
+                  className="text-default-500 pt-1 list-disc list block text-lg hover:underline"
+                  href={"/"}
+                >
+                  5 VSCode Extensions Every Developer Should Use
+                </Link>
+                <Link
+                  className="text-default-500 pt-1 list-disc list block text-lg hover:underline"
+                  href={"/"}
+                >
+                  Web3: The Rise of Decentralized Web
+                </Link>
+                <Link
+                  className="text-default-500 pt-1 list-disc list block text-lg hover:underline"
+                  href={"/"}
+                >
+                  Best Practices for React State Management in 2024
+                </Link>
               </ul>
             </div>
 
@@ -404,9 +381,9 @@ const StaffPicks = () => {
                 Follow Us
               </h3>
               <div className="flex space-x-4 flex-wrap">
-                <Link href={'/'}>facebook</Link>
-                <Link href={'/'}>Twitter</Link>
-                <Link href={'/'}>IN</Link>
+                <Link href={"/"}>facebook</Link>
+                <Link href={"/"}>Twitter</Link>
+                <Link href={"/"}>IN</Link>
               </div>
             </div>
           </aside>

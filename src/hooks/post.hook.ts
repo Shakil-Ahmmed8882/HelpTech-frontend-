@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query"
-import { createPost } from "../services/post"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { createPost, getAllPosts } from "../services/post"
 import { toast } from "sonner"
 
 
@@ -14,6 +14,15 @@ export const useCreatePost = () => {
         onError: (error)=>{
             toast.success(error.message)
         }
+    })
+
+}
+
+export const useGetAllPosts = () => {
+
+    return useQuery({
+        queryKey: ["GET_ALL_POSTS"],
+        queryFn: async() => await getAllPosts(),
     })
 
 }

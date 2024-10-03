@@ -5,23 +5,43 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export interface IPost {
-  _id: string;
-  title: string;
-  description: string;
-  images: string[];
-  location: string;
-  city: string;
-  dateFound: string;
-  status: string;
-  isReported: boolean;
-  reportCount: number;
-  category: ICategory;
-  user: IUser;
-  questions: string[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  _id: string
+  title: string
+  images: string[]
+  content: string
+  tags: string[]
+  category: string
+  author: Author
+  upvotes: number
+  downvotes: number
+  isPremium: boolean
+  views: number
+  pdfVersion: string
+  isDeleted: boolean
+  comments: number
+  createdAt: string
+  updatedAt: string
 }
+
+export interface Author {
+  _id: string
+  username: string
+  email: string
+  role: string
+  bio: string
+  profilePhoto: string
+  isVerified: boolean
+  status: string
+  isPremiumUser: boolean
+  followers: number
+  followings: number
+  posts: number
+  createdAt: string
+  updatedAt: string
+  __v: number
+}
+
+
 
 export interface ICategory {
   _id: string;

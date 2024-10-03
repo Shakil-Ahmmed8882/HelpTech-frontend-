@@ -13,3 +13,13 @@ export const createPost = async (postData:any) => {
 };
 
 
+export const getAllPosts = async () => {
+  try {
+    const { data } = await axiosInstance.get("/posts");
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
