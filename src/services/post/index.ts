@@ -32,13 +32,6 @@ export const getSinglePost = async (id:string):Promise<{data: IPost}> => {
   }
 };
 
-export const getAllCommmentsOnSiglePost = async (id:string):Promise<{data: IComment[]}> => {
-  try {
-    const { data } = await axiosInstance.get(`/comments/${id}`);
-    return data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-};
+
 
 
