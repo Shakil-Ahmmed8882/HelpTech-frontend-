@@ -12,7 +12,6 @@ export const registerUser = async (userData: FieldValues) => {
       cookies().set("accessToken", data?.data?.accessToken);
       cookies().set("refreshToken", data?.data?.refreshToken);
     }
-
     return data;
   } catch (error: any) {
     throw new Error(error);
@@ -81,5 +80,31 @@ export const getNewAccessToken = async () => {
     return res.data;
   } catch (error) {
     throw new Error("Failed to get new access token");
+  }
+};
+
+
+
+export const updateUserInfo = async (id:string,userData: FieldValues) => {
+  console.log(userData)
+  try {
+    const { data } = await axiosInstance.post(`/user/${id}`, userData);
+    if (data.success) {
+      
+      cookies().set("accessToken", data?.data?.accessToken);
+    }
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const resetPassword = async (userData: FieldValues) => {
+  
+  try {
+    const { data } = await axiosInstance.post(`/auth/reset-password`, userData);
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
   }
 };

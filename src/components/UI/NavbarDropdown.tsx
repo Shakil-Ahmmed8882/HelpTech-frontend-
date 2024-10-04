@@ -41,7 +41,7 @@ export default function NavbarDropdown() {
         <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard":"/admin-dashboard"}`)}>
           Dashboard
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigation("/profile")}>
+        <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard/profile":"/admin-dashboard/profile"}`)}>
           Profile
         </DropdownItem>
         <DropdownItem onClick={() => handleNavigation("/profile/settings")}>

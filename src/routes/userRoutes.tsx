@@ -17,20 +17,20 @@ export const userRoutes: TUserRoutes[] = [
       label: 'Profile',
       children: [
         {
+          label: 'Profile',
+          path: '/user-dashboard/profile',
+        },
+        {
           label: 'Edit Profile',
-          path: '/dashboard/profile/edit',
+          path: '/user-dashboard/edit-profile',
         },
         {
           label: 'Change Password',
-          path: '/dashboard/profile/change-password',
+          path: '/user-dashboard/change-password',
         },
         {
             label: 'Following',
-            path: '/dashboard/following',
-          },
-          {
-            label: 'Followers',
-            path: '/dashboard/followers',
+            path: '/user-dashboard/followings-followers',
           },
       ],
     },
@@ -39,32 +39,32 @@ export const userRoutes: TUserRoutes[] = [
       children: [
         {
           label: 'Create Post',
-          path: '/dashboard/posts/create',
+          path: '/user-dashboard/create-post',
         },
         {
           label: 'My Posts',
-          path: '/dashboard/posts/my-posts',
+          path: '/user-dashboard/my-posts',
         },
       ],
     },
     {
       label: 'News Feed',
-      path: '/dashboard/news-feed',
+      path: '/user-dashboard/news-feed',
     },
     {
       label: 'Premium Content',
-      path: '/dashboard/premium',
+      path: '/user-dashboard/premium',
     },
     {
       label: 'Settings',
       children: [
         {
           label: 'Privacy Settings',
-          path: '/dashboard/settings/privacy',
+          path: '/user-dashboard/settings-privacy',
         },
         {
           label: 'Notification Preferences',
-          path: '/dashboard/settings/notifications',
+          path: '/user-dashboard/settings-notifications',
         },
       ],
     },

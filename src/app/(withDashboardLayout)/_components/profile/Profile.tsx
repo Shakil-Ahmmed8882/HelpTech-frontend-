@@ -7,7 +7,8 @@ import { Card, CardHeader } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import Image from "next/image";
 import badge from "@/src/assets/images/icons/badge.png";
-import FollowersAndPost from "./_components/FollowersAndPost";
+import FollowersAndPost from "@/src/app/(withDashboardLayout)/(user)/user-dashboard/profile/_components/FollowersAndPost";
+
 
 export default function Profile() {
   const { user } = useUser();
