@@ -6,7 +6,6 @@ import { getNewAccessToken } from "@/src/services/authService";
 
 import axios from "axios";
 import { cookies } from "next/headers";
-import { toast } from "sonner";
 
 const axiosInstance = axios.create({
   baseURL: envConfig.baseApi,

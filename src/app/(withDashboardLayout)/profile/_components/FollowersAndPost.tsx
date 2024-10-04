@@ -4,9 +4,9 @@ interface UserData {
     followers: number;
     followings: number;
     posts: number;
-  }
+}
   
-  const FollowersAndPost = ({ id }: { id: string }) => {
+const FollowersAndPost = ({ id }: { id: string }) => {
     const { data, isLoading, error } = useGetDBStoredUser(id);
   
     // Handle loading and error states
@@ -14,23 +14,22 @@ interface UserData {
     if (error) return <div>Error loading data</div>;
   
     const { followers = 0, followings = 0, posts = 0 }: UserData = data?.data || {};
-
-    console.log(data?.data)
+  
+    console.log(data?.data);
   
     return (
       <div className="flex space-x-4 mt-4 text-sm text-gray-500">
-        <span>
+        <button className="focus:outline-none">
           <strong className="text-default-600">{posts}</strong> Posts
-        </span>
-        <span>
+        </button>
+        <button className="focus:outline-none">
           <strong className="text-default-600">{followers}</strong> Followers
-        </span>
-        <span>
+        </button>
+        <button className="focus:outline-none">
           <strong className="text-default-600">{followings}</strong> Following
-        </span>
+        </button>
       </div>
     );
-  };
-
-
-  export default FollowersAndPost
+};
+  
+export default FollowersAndPost;

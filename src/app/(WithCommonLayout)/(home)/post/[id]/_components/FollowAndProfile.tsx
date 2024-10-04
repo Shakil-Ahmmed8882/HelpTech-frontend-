@@ -30,6 +30,9 @@ const FollowAndProfile = ({ author, user }: { author: any, user: IUser | null })
             // follow collection _id -> delete
             unFollow(isFollowingData.data.followId);
             setFollowToggle(!followToggle)
+
+            
+            console.log(isFollowing)
             
         } else {
             // If not following, call the follow API

@@ -7,7 +7,6 @@ import {
   MessageCircle,
   MoreIcon,
 } from "../../icons";
-import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/button";
 
 export default function Landing() {
@@ -31,7 +30,7 @@ export default function Landing() {
                   <Post key={post._id} post={post} />
                 ))}
               </section>
-              <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0 self-start">
+              <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0">
                 <div className="py-2">
                   <h2 className="text-3xl font-bold">Trending</h2>
                   <p className="pt-3 text-default-700">
@@ -138,13 +137,12 @@ export function Post({ post }: { post: IPost }) {
   );
 }
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { PostHorizontalSkeleton } from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/PostSkeleton";
 import Category from "./_components/Tags";
-import { useRouter, useSearchParams } from "next/navigation";
 
 
 
@@ -283,7 +281,7 @@ const StaffPicks = () => {
           </section>
 
           {/* Sidebar with recommendations and trending tech tips */}
-          <aside className="border-l border-[#373737] p-4  min-h-screen sticky top-0 self-start">
+          <aside className="border-l border-[#373737] p-4  min-h-screen sticky top-0 ">
             <div className="mb-6">
               <h2 className="text-3xl font-bold text-default-800 mb-4">
                 Recommended for You

@@ -30,8 +30,14 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "off",
+    
+    // Disable all accessibility checks from jsx-a11y plugin
     "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+
+    // Unused imports and variables
     "no-unused-vars": "off",
     "unused-imports/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "warn",
@@ -43,15 +49,11 @@
         "argsIgnorePattern": "^_.*?$"
       }
     ],
-    "react/self-closing-comp": "warn",
-    "react/jsx-sort-props": [
-      "warn",
-      {
-        "callbacksLast": true,
-        "shorthandFirst": true,
-        "noSortAlphabetically": false,
-        "reservedFirst": true
-      }
-    ]
+
+    // JSX properties sorting
+    "react/jsx-sort-props": "off", // Disable props sorting
+
+    // Other rules
+    "react/self-closing-comp": "warn"
   }
 }

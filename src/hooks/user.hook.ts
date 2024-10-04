@@ -1,6 +1,4 @@
-import { useMutation, useQuery} from "@tanstack/react-query";
-import { toast } from "sonner";
-import {  unfollow } from "../services/follows";
+import { useQuery} from "@tanstack/react-query";
 import { getDBStoredUser } from "../services/authService";
 
 
