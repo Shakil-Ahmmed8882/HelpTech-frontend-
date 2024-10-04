@@ -16,10 +16,11 @@ import Vote from "./_components/Vote";
 import { postFallBack } from "./_components/constant";
 import badge from "@/src/assets/images/icons/badge.png";
 import { useUser } from "@/src/context/user.provider";
+import FollowAndProfile from "./_components/FollowAndProfile";
 
 const BlogPost = ({ params }: { params: { id: string } }) => {
   const postId = params?.id;
-  const { data, isLoading,refetch } = useGetSinglePost(postId);
+  const { data, isLoading,refetch,isPending:isPostPending } = useGetSinglePost(postId);
   const [showComment, setShowComment] = useState(false);
   const {user} = useUser()
 
@@ -34,6 +35,9 @@ const BlogPost = ({ params }: { params: { id: string } }) => {
     comments,
   } = data?.data || postFallBack
 
+  
+  
+
   // Toggle showComment state
   const handleCommentToggle = () => {
     setShowComment((prev) => !prev);
@@ -41,7 +45,7 @@ const BlogPost = ({ params }: { params: { id: string } }) => {
 
   return (
     <Container>
-      {isLoading ? (
+      {isLoading && isPostPending? (
         <PostSkeleton />
       ) : (
         <>
@@ -74,12 +78,7 @@ const BlogPost = ({ params }: { params: { id: string } }) => {
                     width={20}
                    />
                   }
-                     <>
-                  {author?._id === user?._id ? (
-                    <p className="text-[#4572D3]">Profile</p>
-                  ) : (
-                    <p className="text-[#4572D3] cursor-pointer">Follow</p> 
-                  )}</>
+                     <FollowAndProfile {...{author, user}}/>
                 </div>
                 <p className="text-default-500 pt-2">
                   Published in Code Like A Girl. 5 min read <br/> Sep 26, 2024
