@@ -1,8 +1,10 @@
+import FollowingAndFollowersTabs from "../../../_components/followingsAndFollowers/FollowingsAndFollowers";
 
 const FollowingAndFollowerspage = () => {
   return (
     <section>
-      FollowingAndFollowerspage
+      <FollowingAndFollowersTabs/>
+      fdfd
     </section>
   );
 };
