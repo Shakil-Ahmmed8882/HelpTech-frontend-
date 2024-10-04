@@ -1,6 +1,6 @@
 
 import { useAddFollows, useIsFollowing, useUnfollow } from "@/src/hooks/follows.hook";
-import { Author, IUser } from "@/src/types";
+import { IUser } from "@/src/types";
 import { useEffect, useState } from "react";
 
 const FollowAndProfile = ({ author, user }: { author: any, user: IUser | null }) => {

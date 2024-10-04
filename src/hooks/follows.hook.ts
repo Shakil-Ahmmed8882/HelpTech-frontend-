@@ -1,5 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { addComment, getAllCommmentsOnSiglePost } from "../services/comments";
+import { useMutation} from "@tanstack/react-query";
 import { toast } from "sonner";
 import { revalidateTag } from "next/cache";
 import { addFollow, isFollowing, unfollow } from "../services/follows";
