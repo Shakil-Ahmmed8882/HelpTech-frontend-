@@ -25,9 +25,9 @@ const HTSelect = ({
       <Select
         isDisabled={disabled}
         {...register(name)}
+        className=""
         label={label}
         variant={variant}
-        className=""
       >
         {options.map((option: IItem) => (
           <SelectItem key={option.key}>{option.label}</SelectItem>

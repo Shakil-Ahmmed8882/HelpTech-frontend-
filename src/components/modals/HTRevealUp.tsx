@@ -29,11 +29,11 @@ export const HTRevealupModal = ({
       <Button className={buttonClassName} onPress={onOpen}>
         {buttonText}
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4">
+      <Modal className="py-4" isOpen={isOpen} onOpenChange={onOpenChange}>
         <motion.div
-          initial={{ opacity: 0, y: "100vh" }} // Start fully hidden from bottom
           animate={{ opacity: 1, y: 0 }} // Animate to the center
           exit={{ opacity: 0, y: "100vh" }} // Exit back to the bottom
+          initial={{ opacity: 0, y: "100vh" }} // Start fully hidden from bottom
           transition={{ duration: 0.6, ease: "easeInOut" }} // Smooth timing for reveal
         >
           <ModalContent>

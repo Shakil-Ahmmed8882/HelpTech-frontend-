@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
-import JoditEditor from "jodit-react";
+import React from "react";
 
 import Container from "@/src/components/UI/Container";
 
@@ -13,13 +12,13 @@ const WritePage = () => {
     <Container>
       <div className="flex gap-3 items-center justify-between">
         <h1 className="hidden sm:block text-3xl md:text-6xl font-bold text-center text-default-200">Write your sotry.. </h1>
-        <PostForm></PostForm>
+        <PostForm />
       </div>
       <div>
         <Image
           alt=""
-          src={pen}
           className="w-1/3  opacity-40  mx-auto object-cover"
+          src={pen}
         />
       </div>
     </Container>

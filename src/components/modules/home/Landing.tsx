@@ -1,5 +1,4 @@
 "use client";
-import { Input } from "@nextui-org/input";
 import {
   Bookmark,
   DislikeIcon,
@@ -12,42 +11,10 @@ import { useForm } from "react-hook-form";
 import { Button } from "@nextui-org/button";
 
 export default function Landing() {
-  const { register, handleSubmit, watch } = useForm();
-  const searchTerm = watch("search");
-  // const {
-  //   mutate: handleSearchItems,
-  //   data,
-  //   isPending,
-  //   isSuccess,
-  // } = useSearchItems();
-  // const [searchResults, setSearchResults] = useState<ISearchResults[] | []>([]);
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   handleSearchItems(searchTerm);
-  // }, [searchTerm]);
-
-  // useEffect(() => {
-  //   if (!searchTerm) {
-  //     setSearchResults([]);
-  //   }
-
-  //   if (!isPending && isSuccess && data && searchTerm) {
-  //     setSearchResults(data?.data?.hits ?? []);
-  //   }
-  // }, [isPending, isSuccess, data, searchTerm]);
-
-  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
-  //   console.log(data);
-  // };
-
-  const handleSeeAll = (searchTerm: string) => {
-    const queryString = searchTerm.trim().split(" ").join("+");
-    // router.push(`/found-items?query=${queryString}`);
-  };
-
+  
   const { data, isLoading } = useGetAllPosts();
   const allPosts = data?.data;
+  
 
 
   return (
@@ -58,7 +25,8 @@ export default function Landing() {
         <>
           <div>
             <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
-              <section className="md:w-[65%] relative min-h-screen pt-20">
+              <section className="md:w-[65%] relative min-h-screen">
+              <Category/>
                 {allPosts?.map((post: IPost) => (
                   <Post key={post._id} post={post} />
                 ))}
@@ -85,9 +53,8 @@ export default function Landing() {
 }
 
 import Image from "next/image";
-import { Card, CardFooter, CardHeader } from "@nextui-org/card";
+import { Card, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
-import { Skeleton } from "@nextui-org/skeleton";
 
 export function Post({ post }: { post: IPost }) {
   const {
@@ -110,7 +77,7 @@ export function Post({ post }: { post: IPost }) {
     <Link href={`/post/${_id}`}>
       <Card className="shadow-none bg-transparent p-0 pb-20 ">
         <CardHeader className="flex flex-row items-center gap-4 !pb-7 p-0">
-          <Avatar className="w-8 h-8" src={author?.profilePhoto}></Avatar>
+          <Avatar className="w-8 h-8" src={author?.profilePhoto} />
           <div className="flex flex-col">
             <h2 className="text-md">{author?.username}</h2>
           </div>
@@ -119,9 +86,9 @@ export function Post({ post }: { post: IPost }) {
           <div className="space-y-4 md:w-2/3">
             <h1 className="text-2xl font-bold">{title}</h1>
             <div
-              className="text-default-500 text-lg"
               dangerouslySetInnerHTML={{ __html: content }}
-            ></div>
+              className="text-default-500 text-lg"
+             />
 
             <section className="flex justify-between items-center">
               <p className="text-sm text-default-500">1d ago</p>
@@ -158,11 +125,11 @@ export function Post({ post }: { post: IPost }) {
           </div>
           <figure className="md:w-1/3">
             <Image
-              width={200}
-              height={500}
-              className="rounded w-full pb-5 sm:pb-0"
               alt="blog"
+              className="rounded w-full pb-5 sm:pb-0"
+              height={500}
               src={images[0]}
+              width={200}
             />
           </figure>
         </section>
@@ -171,18 +138,15 @@ export function Post({ post }: { post: IPost }) {
   );
 }
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { PostHorizontalSkeleton } from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/PostSkeleton";
+import Category from "./_components/Tags";
+import { useRouter, useSearchParams } from "next/navigation";
 
-const posts = [
-  { title: "Top 10 JavaScript Tips", views: 25000, url: "#" },
-  { title: "CSS Grid vs Flexbox", views: 18000, url: "#" },
-  { title: "React Performance Optimization", views: 15000, url: "#" },
-  // Add more posts as needed
-];
+
 
 const StaffPicks = () => {
   return (
@@ -198,7 +162,7 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-          ></Avatar>
+           />
         </div>
         <div>
           <p className="text-sm">
@@ -206,8 +170,8 @@ const StaffPicks = () => {
             Workplaces
           </p>
           <Link
-            href="#"
             className="text-default-500 hover:underline pt-3 block "
+            href="#"
           >
             How I Burned My Resume and Built a New Career
           </Link>
@@ -219,15 +183,15 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-          ></Avatar>
+           />
         </div>
         <div>
           <p className="text-sm">
             <span className="font-bold ">Alisa Wolf</span> 🌙 🔮 in Human Parts
           </p>
           <Link
-            href="#"
             className="text-default-500 hover:underline pt-3 block "
+            href="#"
           >
             Why I Stopped Boycotting Businesses and Cutting People Off Because
             of Their Political Views
@@ -240,15 +204,15 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-          ></Avatar>
+           />
         </div>
         <div>
           <p className="text-sm">
             <span className="font-bold ">The Medium Newsletter</span> 🌙 🔮
           </p>
           <Link
-            href="#"
             className=" text-default-500 hover:underline pt-3 block "
+            href="#"
           >
             “You don’t own a community; you influence, co-create and curate it.”
           </Link>
@@ -257,8 +221,8 @@ const StaffPicks = () => {
 
       {/* Full List Link */}
       <Link
-        href="#"
         className="text-green-600 font-medium pl-11 block hover:underline"
+        href="#"
       >
         See more..
       </Link>
@@ -269,14 +233,14 @@ const StaffPicks = () => {
       </h4>
       <div className="flex space-x-2 py-2 pb-5">
         <Link
-          href="#"
           className="bg-default-100 text-sm text-default-700 px-3 py-1 rounded-full hover:bg-default-200"
+          href="#"
         >
           Equality
         </Link>
         <Link
-          href="#"
           className="bg-default-100 text-sm text-default-700 px-3 py-1 rounded-full hover:bg-default-200"
+          href="#"
         >
           Bitcoin
         </Link>
@@ -298,7 +262,7 @@ const StaffPicks = () => {
                   A deep dive into how closures work in JavaScript and their
                   real-world applications...
                 </p>
-                <Link href="#" className="text-blue-500 mt-4 block">
+                <Link className="text-blue-500 mt-4 block" href="#">
                   Read more →
                 </Link>
               </div>
@@ -310,9 +274,9 @@ const StaffPicks = () => {
                   Learn how to quickly set up and use Tailwind CSS for
                   responsive web design...
                 </p>
-                <a href="#" className="text-blue-500 mt-4 block">
+                <Link className="text-blue-500 mt-4 block" href="#">
                   Read more →
-                </a>
+                </Link>
               </div>
               {/* Add more posts here */}
             </div>
@@ -332,7 +296,7 @@ const StaffPicks = () => {
                   A deep dive into how closures work in JavaScript and their
                   real-world applications...
                 </p>
-                <Link href="#" className="text-blue-500 mt-4 block">
+                <Link className="text-blue-500 mt-4 block" href="#">
                   Read more →
                 </Link>
               </div>
@@ -376,9 +340,9 @@ const StaffPicks = () => {
               </p>
               <form>
                 <input
-                  type="email"
                   className="w-full border border-default-300 p-2 rounded-lg mb-focus:outline-none focus:border-blue-500 mb-4"
                   placeholder="Enter your email"
+                  type="email"
                 />
                 <Button className="w-full text-white p-2 rounded-lg">
                   Subscribe

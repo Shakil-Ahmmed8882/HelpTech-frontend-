@@ -95,7 +95,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <HTModal buttonText="Write post" title="Create post" buttonClassName="bg-primaryColor">
+      <HTModal buttonClassName="bg-primaryColor" buttonText="Write post" title="Create post">
 
       {createPostPending && <Loading />}
       <div className="h-full rounded-xl py-12">
@@ -162,8 +162,8 @@ export default function CreatePost() {
             )}
 
             <JoditEditor
-              className={`dark:!bg-[red] text-black ${styles.joditEditor}`} // Add your custom CSS class here if needed
               ref={editor}
+              className={`dark:!bg-[red] text-black ${styles.joditEditor}`} // Add your custom CSS class here if needed
               value={content}
               onChange={(newContent) => setContent(newContent)}
             />

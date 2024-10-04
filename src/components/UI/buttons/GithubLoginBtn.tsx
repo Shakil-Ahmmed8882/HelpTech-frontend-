@@ -6,10 +6,10 @@ import githubIcon from "../../../assets/images/icons/github.png";
 const GithubLoginBtn =({label}:{label:string}) =>  {
   return (
     <Button
-      onClick={() => signIn("github")}
       className="w-full mt-3 flex items-center bg-default-50"
+      onClick={() => signIn("github")}
     >
-      <div className="bg-[white] flex rounded-full"><Image src={githubIcon} width={25} height={25} alt="google icon" /></div>{label} with GitHub
+      <div className="bg-[white] flex rounded-full"><Image alt="google icon" height={25} src={githubIcon} width={25} /></div>{label} with GitHub
     </Button>
   );
 };

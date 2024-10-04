@@ -13,9 +13,9 @@ const DashboardNavbar = ({ children }: { children: ReactNode }) => {
         <h2 className="font-bold w-1/3 hidden md:block">Dashboard</h2>
         <nav className="flex justify-between md:middle-center gap-3 w-full md:w-2/3 h-8">
           <Input
-            type="text"
-            placeholder="search"
             className="w-full hidden sm:flex"
+            placeholder="search"
+            type="text"
           />
           <div className="w-full md:w-[200px] flex justify-end text-end md:middle-center items-center gap-3">
             <ThemeSwitch />

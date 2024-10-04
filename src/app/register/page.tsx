@@ -113,7 +113,7 @@ import loginValidationSchema from "@/src/schemas/logoin.schema";
 import Loading from "@/src/components/UI/Loading";
 import HTInput from "@/src/components/form/HTInput";
 import HTForm from "@/src/components/form/HTForm";
-import { useUserLogin, useUserRegistration } from "@/src/hooks/auth.hook";
+import { useUserRegistration } from "@/src/hooks/auth.hook";
 import { useUser } from "@/src/context/user.provider";
 import GoogleLoginBtn from "@/src/components/UI/buttons/GoogleLoginBtn";
 

@@ -12,12 +12,12 @@ const GoogleLoginBtn = ({label}:{label:string}) => {
 
   return (
     <Button
+      className="w-full mt-3 flex items-center bg-default-50"
       onClick={() => {
         signIn("google", { callbackUrl: redirect ? redirect : "/" });
       }}
-      className="w-full mt-3 flex items-center bg-default-50"
     >
-      <Image src={googleIcon} width={25} height={25} alt="google icon" /> {label} with Google
+      <Image alt="google icon" height={25} src={googleIcon} width={25} /> {label} with Google
     </Button>
   );
 };

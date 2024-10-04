@@ -36,7 +36,7 @@ export default function DashboardNavbarDropdown() {
     <div>
       <Dropdown>
         <DropdownTrigger>
-          <Avatar size="sm" className="cursor-pointer" src={user?.profilePhoto} />
+          <Avatar className="cursor-pointer" size="sm" src={user?.profilePhoto} />
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
           <DropdownItem onClick={() => handleNavigation("/dashboard")}>
@@ -46,10 +46,10 @@ export default function DashboardNavbarDropdown() {
             Settings
           </DropdownItem>
           <DropdownItem
-            onClick={handleLogout}
             key="delete"
             className="text-danger"
             color="danger"
+            onClick={handleLogout}
           >
             Logout
           </DropdownItem>

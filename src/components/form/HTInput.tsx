@@ -24,14 +24,14 @@ export default function HTInput({
   return (
     <Input
       {...register(name)}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
-      isInvalid={!!errors[name]}
-      variant={variant}
-      size={size}
-      required={required}
-      type={type}
-      label={label}
       className={`${className}`}
+      errorMessage={errors[name] ? (errors[name]!.message as string) : ""}
+      isInvalid={!!errors[name]}
+      label={label}
+      required={required}
+      size={size}
+      type={type}
+      variant={variant}
     />
   );
 }

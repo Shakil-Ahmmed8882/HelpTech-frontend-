@@ -27,7 +27,7 @@ export const HTModal = ({
   return (
     <>
       <Button className={buttonClassName} onPress={onOpen}>{buttonText}</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="py-4 overflow-auto !min-h-screen">
+      <Modal className="py-4 overflow-auto !min-h-screen" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>

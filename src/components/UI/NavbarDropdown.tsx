@@ -35,7 +35,7 @@ export default function NavbarDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar size="sm" className="cursor-pointer" src={user?.profilePhoto} />
+        <Avatar className="cursor-pointer" size="sm" src={user?.profilePhoto} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard":"/admin-dashboard"}`)}>
@@ -51,10 +51,10 @@ export default function NavbarDropdown() {
           Create Post
         </DropdownItem>
         <DropdownItem
-          onClick={handleLogout}
           key="delete"
           className="text-danger"
           color="danger"
+          onClick={handleLogout}
         >
           Logout
         </DropdownItem>

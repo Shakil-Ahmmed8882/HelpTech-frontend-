@@ -14,7 +14,7 @@ const HTTextarea = ({ name, label }: IProps) => {
 
   return (
     <Textarea
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      errorMessage={errors[name] ? (errors[name]!.message as string) : ""}
       isInvalid={!!errors[name]}
       label={label}
       {...register(name)}

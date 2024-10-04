@@ -2,15 +2,10 @@ import { ReactNode } from "react";
 
 export default function layout({
   children,
-  recentPosts,
-}: {
-  children: ReactNode;
-  recentPosts: ReactNode;
-}) {
+}: {  children: ReactNode}) {
   return (
     <>
       {children}
-      {recentPosts}
     </>
   );
 }
