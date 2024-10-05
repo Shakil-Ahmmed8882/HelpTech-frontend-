@@ -75,7 +75,7 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
       <HTModal buttonClassName="bg-primaryColor" buttonText="Write post" title="Create post">
         {createPostPending && <Loading />}
         <div className="h-full rounded-xl py-12">
-          <h1 className="text-2xl font-semibold">Post a found item</h1>
+          <h1 className="text-2xl font-semibold">Add your post</h1>
           <Divider className="mb-5 mt-3" />
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)}>

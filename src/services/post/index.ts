@@ -15,6 +15,19 @@ export const createPost = async (postData: any) => {
   }
 };
 
+export const updatePost = async (id:string, postData: any) => {
+
+  
+  
+  try {
+    const { data } = await axiosInstance.patch(`/posts/${id}`, postData);
+    revalidateTag("POST");
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const getAllPosts = async () => {
   try {
     const token = cookies().get("accessToken")?.value;
@@ -48,7 +61,7 @@ export const getOfMyPosts = async () => {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["MY_POSTS"],
+          tags: ["POST"],
         },
       }
     );

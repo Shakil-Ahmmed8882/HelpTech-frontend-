@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { createPost, getAllPosts, getOfMyPosts, getSinglePost } from "../services/post"
+import { createPost, getAllPosts, getOfMyPosts, getSinglePost, updatePost } from "../services/post"
 import { toast } from "sonner"
+import { revalidateTag } from "next/cache"
 
 
 export const useCreatePost = () => {
@@ -35,6 +36,20 @@ export const useGetAllOfMyPosts = () => {
     })
 
 }
+
+
+
+export const useUpdatePosts = () => {
+  
+    return useMutation({
+        mutationKey: ["POSTS"],
+        mutationFn: async ({ id, postData }: { id: string; postData: any }) => {
+          return await updatePost(id, postData);
+        },
+        
+      });
+};
+
 
 export const useGetSinglePost = (id: string) => {
   return useQuery({

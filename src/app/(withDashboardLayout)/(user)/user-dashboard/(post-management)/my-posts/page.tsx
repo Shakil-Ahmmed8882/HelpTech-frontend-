@@ -14,6 +14,8 @@ import {
 import { useGetAllOfMyPosts } from "@/src/hooks/post.hook";
 import { PostType } from "@/src/types/post.type";
 import TableSkeleton from "@/src/components/skeleton/TableSkeleton";
+import EditPost from "@/src/app/(withDashboardLayout)/_components/EditPost";
+
 
 // Cell Renderer function to keep render logic separate
 const renderCell = (
@@ -66,24 +68,24 @@ const renderCell = (
 // Main PostTable Component
 export default function MyPosts() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   // Fetching posts data from the backend
-  const { data,isLoading } = useGetAllOfMyPosts();
+  const { data, isLoading } = useGetAllOfMyPosts();
 
-
-
-
-  if(isLoading) return <TableSkeleton/>
-  // Edit handler
-  const handleEdit = (id: string) => {
-    setSelectedId(id);
-    console.log("Edit clicked for post with ID:", id);
-  };
+  if (isLoading) return <TableSkeleton />;
 
   // Delete handler
   const handleDelete = (id: string) => {
     setSelectedId(id);
     console.log("Delete clicked for post with ID:", id);
+  };
+
+  // Edit handler
+  const handleEdit = (id: string) => {
+    setSelectedId(id);
+    setIsEditing(true);
+    console.log("Edit clicked for post with ID:", id);
   };
 
   // Destructure data safely
@@ -95,23 +97,33 @@ export default function MyPosts() {
   }
 
   return (
-    <Table aria-label="Posts Table">
-      <TableHeader>
-        <TableColumn>Title</TableColumn>
-        <TableColumn>Image</TableColumn>
-        <TableColumn>Category</TableColumn>
-        <TableColumn align="center">Actions</TableColumn>
-      </TableHeader>
-      <TableBody>
-        {posts.map((post) => (
-          <TableRow key={post._id}>
-            <TableCell>{renderCell(post, "title", handleEdit, handleDelete)}</TableCell>
-            <TableCell>{renderCell(post, "images", handleEdit, handleDelete)}</TableCell>
-            <TableCell>{renderCell(post, "category", handleEdit, handleDelete)}</TableCell>
-            <TableCell>{renderCell(post, "actions", handleEdit, handleDelete)}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div>
+      <Table aria-label="Posts Table">
+        <TableHeader>
+          <TableColumn>Title</TableColumn>
+          <TableColumn>Image</TableColumn>
+          <TableColumn>Category</TableColumn>
+          <TableColumn align="center">Actions</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {posts.map((post) => (
+            <TableRow key={post._id}>
+              <TableCell>{renderCell(post, "title", handleEdit, handleDelete)}</TableCell>
+              <TableCell>{renderCell(post, "images", handleEdit, handleDelete)}</TableCell>
+              <TableCell>{renderCell(post, "category", handleEdit, handleDelete)}</TableCell>
+              <TableCell>{renderCell(post, "actions", handleEdit, handleDelete)}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      {/* Conditionally render the EditForm component */}
+      {isEditing && (
+        <EditPost
+          postId={selectedId}
+          onClose={setIsEditing}
+        />
+      )}
+    </div>
   );
 }

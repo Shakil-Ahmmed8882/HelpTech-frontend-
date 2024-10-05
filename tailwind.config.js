@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primaryColor: "#239DDF"
+        primaryColor: "#239DDF",
+        darkColor: "#22272E"
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
