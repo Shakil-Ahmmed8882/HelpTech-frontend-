@@ -56,7 +56,7 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
 
 
     
-    console.log(postData)
+
 
     handleCreatePost(postData);
   };

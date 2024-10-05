@@ -33,8 +33,6 @@ const EditPost: React.FC<EditPostProps> = ({ postId, onClose }) => {
 
     try {
       handleUpdatePost({ id: postId as string, postData });
-      console.log({ postData });
-      console.log({postUpdatedData});
 
       onClose(false);
     } catch (error: any) {

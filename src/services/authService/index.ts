@@ -60,7 +60,7 @@ export const getCurrentUser = async () => {
 export const getDBStoredUser = async (id: string) => {
   const { data } = await axiosInstance.get(`/user/${id}`);
   
-  console.log(data)
+  
   return data;
 };
 
@@ -86,7 +86,7 @@ export const getNewAccessToken = async () => {
 
 
 export const updateUserInfo = async (id:string,userData: FieldValues) => {
-  console.log(userData)
+
   try {
     const { data } = await axiosInstance.post(`/user/${id}`, userData);
     if (data.success) {

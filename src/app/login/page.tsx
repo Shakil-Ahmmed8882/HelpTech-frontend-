@@ -28,8 +28,6 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleUserLogin(data);
     userLoading(true);
-    
-    console.log(data)
   };
 
   useEffect(() => {

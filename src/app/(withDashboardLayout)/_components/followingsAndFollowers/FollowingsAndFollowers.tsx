@@ -99,13 +99,13 @@ export default function App() {
     try {
       if (type === "follow") {
         refetch()
-        console.log("Following user:", followData);
+        
         addFollow(followData); 
       } else if (type === "unfollow") {
         
         followingDataRefetch()
         unFollow(follow_id as string)
-        console.log("Unfollowing user with follow_id:", follow_id);
+        
         
       }
     } catch (error) {

@@ -32,7 +32,7 @@ const FollowAndProfile = ({ author, user }: { author: any, user: IUser | null })
             setFollowToggle(!followToggle)
 
             
-            console.log(isFollowing)
+            
             
         } else {
             // If not following, call the follow API

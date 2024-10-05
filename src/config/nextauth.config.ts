@@ -38,13 +38,7 @@ export const AuthOptions: NextAuthOptions = {
                     profilePhoto: profile.picture,
                 });
 
-                  console.log({
-                    username: profile.name,
-                    email: profile.email,
-                    profilePhoto: profile.picture,
-                  })
-
-
+              
                 if (
                     response.data.data.accessToken ||
                     response.data.data.refreshToken
@@ -63,12 +57,6 @@ export const AuthOptions: NextAuthOptions = {
                 profilePhoto : profile.avatar_url,
               });
 
-              
-              console.log("xxxxxxxxxxxxxxxx", {
-                name: profile.name,
-                email: profile.email,
-                img: profile.avatar_url,
-              })
 
 
                 if (

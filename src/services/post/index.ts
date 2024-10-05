@@ -15,12 +15,20 @@ export const createPost = async (postData: any) => {
   }
 };
 
-export const updatePost = async (id:string, postData: any) => {
-
-  
-  
+export const updatePost = async (id: string, postData: any) => {
   try {
     const { data } = await axiosInstance.patch(`/posts/${id}`, postData);
+    revalidateTag("POST");
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+// Delete post 
+export const deletePost = async (id: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/posts/${id}`);
     revalidateTag("POST");
     return data;
   } catch (error: any) {

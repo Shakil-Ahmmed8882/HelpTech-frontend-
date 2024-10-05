@@ -31,8 +31,6 @@ export const AuthOptions: NextAuthOptions = {
     async signIn({ profile, account }: any) {
         try {
             
-          
-          console.log({profile})
 
             if (!profile || !account) {
                 return false;
@@ -45,14 +43,14 @@ export const AuthOptions: NextAuthOptions = {
                     img: profile.picture,
                 });
 
-                console.log({response})
+                
 
                 if (
                     response.data.data.accessToken ||
                     response.data.data.refreshToken
                 ) {
 
-                  console.log({accesstOtken:"accesstOtken"})
+                  
                     cookies().set("accessToken", response.data.data.accessToken);
                     cookies().set("refreshToken", response.data.data.refreshToken);
                     return true;
@@ -68,11 +66,6 @@ export const AuthOptions: NextAuthOptions = {
               });
 
               
-              console.log("xxxxxxxxxxxxxxxx", {
-                name: profile.name,
-                email: profile.email,
-                img: profile.avatar_url,
-              })
 
 
                 if (

@@ -2,13 +2,11 @@
 
 
 import axiosInstance from "@/src/lib/AxiosInstance";
-import { IPost } from "@/src/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export const addFollow = async (followData:any) => {
     
-    console.log("from the follow service file...")
   try {
     const { data } = await axiosInstance.post("/follows", followData);
     revalidateTag("VOTES")
