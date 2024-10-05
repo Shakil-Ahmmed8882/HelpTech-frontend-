@@ -13,6 +13,7 @@ import HTInput from "@/src/components/form/HTInput";
 import HTSelect from "@/src/components/form/HTSelect";
 import { HTModal } from "@/src/components/modals/HTModal";
 import styles from "../editor.module.css";
+import { uploadToImageBB } from "@/src/utils/uploadImage";
 
 // Dynamically import JoditEditor without SSR
 const JoditEditor = dynamic(() => import("jodit-react"), {
@@ -39,13 +40,23 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
   // Define the editor ref here
   const editor = useRef(null); 
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> =async (data) => {
+
+    const imageUrl = await uploadToImageBB(imageFiles[0]);
+    delete data!.file;
+    delete data!.image;
+
     const postData = {
       ...data,
       author: user?._id || "",
       tags: [data?.tags],
+      images: [imageUrl],
       content,
     };
+
+
+    
+    console.log(postData)
 
     handleCreatePost(postData);
   };
