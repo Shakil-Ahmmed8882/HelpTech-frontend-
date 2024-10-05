@@ -4,7 +4,6 @@ const FollowingAndFollowerspage = () => {
   return (
     <section>
       <FollowingAndFollowersTabs/>
-      fdfd
     </section>
   );
 };

@@ -16,11 +16,11 @@ const FollowAndProfile = ({ author, user }: { author: any, user: IUser | null })
         following: author?._id
     }
 
-    // Check if the user is already following the author on component mount
     useEffect(() => {
         handleCheckIsFollowing(followData);
     }, [followToggle]);
-
+    
+    // Check if the user is already following the author on component mount
     const isFollowing = isFollowingData?.data?.isFollowing
 
     // Function to handle the follow/unfollow logic

@@ -29,7 +29,6 @@ export const isFollowing = async (isFollowingData: {follower:string, following:s
 };
 
 export const unfollow = async (id:string) => {
-    console.log("[service]unfollow",id)
   try {
     const {data} =  await axiosInstance.delete(`/follows/${id}`)
     return data
@@ -38,11 +37,11 @@ export const unfollow = async (id:string) => {
   }
 };
 
-export const getSinglePost = async (id:string):Promise<{data: IPost}> => {
+export const getAllFollowersOfSingleUser = async (id:string):Promise<{data: any}> => {
   try {
      const token = cookies().get("accessToken")?.value;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/posts/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/follows/${id}/followers`,
       {
         method: "GET",
         headers: {
@@ -51,7 +50,37 @@ export const getSinglePost = async (id:string):Promise<{data: IPost}> => {
         },
         cache:"no-store",
         next: {
-          tags: ["POST"]
+          tags: ["FOLLOWERS"],
+          revalidate:2
+        },
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
+
+
+
+export const getAllFollowingsOfSingleUser = async (id:string):Promise<{data: any}> => {
+  try {
+     const token = cookies().get("accessToken")?.value;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/follows/${id}/followings`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+        cache:"no-store",
+        next: {
+          tags: ["FOLLOWINGS"],
+          revalidate:2
         },
       }
     );

@@ -15,7 +15,7 @@ const FollowersAndPost = ({ id }: { id: string }) => {
   
     const { followers = 0, followings = 0, posts = 0 }: UserData = data?.data || {};
   
-    console.log(data?.data);
+    
   
     return (
       <div className="flex space-x-4 mt-4 text-sm text-gray-500">

@@ -1,21 +1,21 @@
-import { useMutation} from "@tanstack/react-query";
+import { useMutation, useQuery} from "@tanstack/react-query";
 import { toast } from "sonner";
 import { revalidateTag } from "next/cache";
-import { addFollow, isFollowing, unfollow } from "../services/follows";
+import { addFollow, getAllFollowersOfSingleUser, getAllFollowingsOfSingleUser, isFollowing, unfollow } from "../services/follows";
 
+export const useAddFollows = () => {
+  return useMutation({
+    mutationKey: ["ADD_FOLLOWS"],
+    mutationFn: async (followData: any) => await addFollow(followData),
+    onSuccess: () => {
+      return (
+        toast.success("Followed"),    
+        revalidateTag("FOLLOWS")      
+      )
+    },
+  });
+};
 
-  export const useAddFollows = () => {
-
-    return useMutation({
-        mutationKey: ["ADD_FOLLOWS"],
-        mutationFn: async(followData:any) => await addFollow(followData),
-        onSuccess: ()=>{
-            revalidateTag("FOLLOWS")
-            toast.success("Followed")
-        }
-    })
-
-}
 
   export const useIsFollowing = () => {
 
@@ -31,7 +31,27 @@ import { addFollow, isFollowing, unfollow } from "../services/follows";
     return useMutation({
         mutationKey: ["UNFOLLOW"],
         mutationFn: async(id:string) => await unfollow(id),
-        onSuccess: () => toast.success("followed")
+        onSuccess: () => toast.success("unfollowed")
     })
 
 }
+
+export const useGetAllFollowersOfSingleUser = (id: string) => {
+  return useQuery({
+    queryKey: ["FOLLOWERS", id],
+    queryFn: async ({ queryKey }) => {
+      const [, userId] = queryKey;
+      return await getAllFollowersOfSingleUser(userId);
+    },
+  });
+};
+
+export const useGetAllFollowingsOfSingleUser = (id: string) => {
+  return useQuery({
+    queryKey: ["FOLLOWINGS", id],
+    queryFn: async ({ queryKey }) => {
+      const [, userId] = queryKey;
+      return await getAllFollowingsOfSingleUser(userId);
+    },
+  });
+};
