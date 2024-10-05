@@ -1262,7 +1262,7 @@
     "@react-aria/utils" "3.24.1"
     "@react-stately/utils" "3.10.1"
 
-"@nextui-org/table@2.0.40":
+"@nextui-org/table@2.0.40", "@nextui-org/table@^2.0.40":
   version "2.0.40"
   resolved "https://registry.yarnpkg.com/@nextui-org/table/-/table-2.0.40.tgz#2ee8e380402e0cf0eaf468cf1ec931712b5aa12f"
   integrity sha512-qDbSsu6mpWnr1Mt3DYTBzTFtN8Z5Gv7GDqECGcDVradkDVuJFZvkB9Ke392LcVZoXSk99Rpamq4WSWkEewBhWg==
@@ -5051,6 +5051,7 @@ nexios-http@^1.1.21:
     "@nextui-org/listbox" "2.1.25"
     "@nextui-org/modal" "^2.0.41"
     "@nextui-org/navbar" "2.0.36"
+    "@nextui-org/react" "^2.4.8"
     "@nextui-org/select" "^2.2.7"
     "@nextui-org/skeleton" "^2.0.31"
     "@nextui-org/snippet" "2.0.41"
@@ -5074,7 +5075,7 @@ nexios-http@^1.1.21:
     lightgallery "^2.7.2"
     nexios-http "^1.1.21"
     next "14.2.4"
-    next-app-template "file:../../../../../../AppData/Local/Yarn/Cache/v6/npm-next-app-template-0.0.1-2a1ff8f8-7825-4b0b-b290-43233d451da8-1728074747089/node_modules/next-app-template"
+    next-app-template "file:../../../../../../AppData/Local/Yarn/Cache/v6/npm-next-app-template-0.0.1-c55af25f-bf67-40f9-b3ce-ac8c7e6f3e39-1728108502400/node_modules/next-app-template"
     next-auth "^4.24.8"
     next-themes "^0.2.1"
     quill "^2.0.2"

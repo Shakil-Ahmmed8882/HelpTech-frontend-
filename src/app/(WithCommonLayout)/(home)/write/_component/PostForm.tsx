@@ -19,7 +19,11 @@ const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
 
-export default function CreatePost() {
+export default function CreatePost({redirect}:{redirect:string | undefined}) {
+
+
+  
+
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [content, setContent] = useState("");
@@ -63,7 +67,7 @@ export default function CreatePost() {
   };
 
   if (!createPostPending && isSuccess) {
-    router.push("/");
+    router.push(`${redirect?redirect:"/"}`);
   }
 
   return (

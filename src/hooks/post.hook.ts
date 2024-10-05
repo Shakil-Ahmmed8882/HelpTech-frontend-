@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { createPost, getAllPosts, getSinglePost } from "../services/post"
+import { createPost, getAllPosts, getOfMyPosts, getSinglePost } from "../services/post"
 import { toast } from "sonner"
 
 
@@ -23,6 +23,15 @@ export const useGetAllPosts = () => {
     return useQuery({
         queryKey: ["GET_ALL_POSTS"],
         queryFn: async() => await getAllPosts(),
+    })
+
+}
+
+export const useGetAllOfMyPosts = () => {
+
+    return useQuery({
+        queryKey: ["MY_POSTS"],
+        queryFn: async() => await getOfMyPosts(),
     })
 
 }
