@@ -12,10 +12,10 @@ export const siteConfig = {
     //   label: "Services",
     //   href: "/services",
     // },
-    // {
-    //   label: "Portfolio/Case-Studies",
-    //   href: "/portfolio",
-    // },
+    {
+      label: "Pricing/Plan",
+      href: "/pricing",
+    },
     {
       label: "Contact",
       href: "/contact",
