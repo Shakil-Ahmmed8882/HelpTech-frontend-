@@ -2,7 +2,8 @@ import { CheckCircle } from "@/src/components/icons"
 import { Button } from "@nextui-org/button"
 import Link from "next/link"
 
-export default function PaymentSuccess() {
+export default function PaymentSuccess({params}:{params:{ transactionId: string }}) {
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -19,12 +20,12 @@ export default function PaymentSuccess() {
             <div className="text-sm font-medium text-gray-700">
               Order Details:
             </div>
-            <div className="mt-2 bg-gray-50 p-4 rounded-md">
-              <div className="flex justify-between">
+            <div className="mt-2 bg-gray-50 p-4 rounded-md text-black">
+              <div className="flex justify-between text-black">
                 <span>Order Number:</span>
-                <span className="font-semibold">#12345</span>
+                <span className="font-semibold text-black">#12345</span>
               </div>
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mt-2 text-black">
                 <span>Total Amount:</span>
                 <span className="font-semibold">$99.99</span>
               </div>
@@ -35,7 +36,7 @@ export default function PaymentSuccess() {
             <div className="text-sm font-medium text-gray-700 mb-2">
               A confirmation email has been sent to your email address.
             </div>
-            <Button>
+            <Button className="bg-primaryColor text-white mt-5">
               <Link href="/">
                 Continue Shopping
               </Link>

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUserActions } from "../services/analytics";
+import { getUserActions } from "../services/user-analytics";
 
 export const useGetUserActionCounts = () => {
     return useQuery({

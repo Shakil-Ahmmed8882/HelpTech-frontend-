@@ -3,18 +3,18 @@ export type TItem = {
     path?: string,
 }
 
-export interface TUserRoutes extends TItem  {
+export interface TDashboarRoutes extends TItem  {
     children?: TItem[]
 }
 
 
-export const userRoutes: TUserRoutes[] = [
+export const userRoutes: TDashboarRoutes[] = [
     {
       label: 'Home',
-      path: '/dashboard/home',
+      path: '/user-dashboard',
     },
     {
-      label: 'Profile',
+      label: 'Profile Management',
       children: [
         {
           label: 'Profile',

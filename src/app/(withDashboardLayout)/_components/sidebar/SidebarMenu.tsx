@@ -1,9 +1,9 @@
-import { TItem, TUserRoutes } from "@/src/routes/userRoutes";
+import { TItem, TDashboarRoutes } from "@/src/routes/userRoutes";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export const SidebarMenu = ({ routes, isCollapsed }: { routes: TUserRoutes[], isCollapsed: boolean }) => {
+export const SidebarMenu = ({ routes, isCollapsed }: { routes: TDashboarRoutes[], isCollapsed: boolean }) => {
   return (
     <motion.div
       animate={{ opacity: isCollapsed ? 0 : 1 }}

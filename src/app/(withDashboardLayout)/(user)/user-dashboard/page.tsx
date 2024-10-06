@@ -2,12 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import { useGetUserActionCounts } from "@/src/hooks/analytics.hook";
+import { useGetUserActionCounts } from "@/src/hooks/user.analytics.hook";
 import DashboardCardSkeleton from "./(post-management)/my-posts/_components/CardSkeleton";
 
 // Content Analytics: Show share counts, reaction counts, comment counts and views counts on the User Dashboard for the overall posts.
 
-const Dashboard = () => {
+const UserDashboard = () => {
   const { data,isLoading, isPending } = useGetUserActionCounts();
 
   // Assuming data has an array of actions
@@ -71,7 +71,7 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;
 
 interface ActionType {
   type: string;
@@ -80,10 +80,10 @@ interface ActionType {
 
 const Statistics = ({ action }: { action: ActionType }) => {
   return (
-    <div className="bg-gray-900 p-4 rounded-xl text-center">
-      <h3 className="text-sm text-gray-400">{action.type}</h3>
-      <p className="text-4xl font-bold mt-2">{action.count}</p>
-      <p className="text-green-500 text-sm mt-1">+2.6%</p>
-    </div>
+    <div className="bg-gradient-to-b dark:from-[#000000] to-[#fff] p-4 rounded-xl text-center">
+    <h3 className="text-sm text-default-900">{action.type}</h3>
+    <p className="text-4xl font-bold my-4 text-default-900">{action.count}</p>
+    <p className="text-green-500 text-sm mt-1">+2.6%</p>
+  </div>
   );
 };

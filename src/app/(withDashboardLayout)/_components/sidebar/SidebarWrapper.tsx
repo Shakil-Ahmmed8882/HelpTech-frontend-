@@ -9,10 +9,14 @@ import { SidebarMenu } from "./SidebarMenu";
 import { Divider } from "@nextui-org/divider";
 import Logo from "@/src/components/UI/Logo";
 import { userRoutes } from "@/src/routes/userRoutes";
+import { useUser } from "@/src/context/user.provider";
+import { adminRoutes } from "@/src/routes/adminRoutes";
 
 const SidebarWrapper = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const {user} = useUser()
+  const conditionalDashboardRoutes = user && user?.role === "user"? userRoutes : adminRoutes
   const toggleSidebar = () => {
     setIsCollapsed((prevState) => !prevState);
   };
@@ -36,7 +40,7 @@ const SidebarWrapper = () => {
         )}
       </div>
         <Divider className="mt-4 mb-8"/>
-      <SidebarMenu isCollapsed={isCollapsed} routes={userRoutes} />
+      <SidebarMenu isCollapsed={isCollapsed} routes={conditionalDashboardRoutes} />
     </motion.aside>
   );
 };
