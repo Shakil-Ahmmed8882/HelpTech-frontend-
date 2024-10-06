@@ -11,20 +11,8 @@ export const adminRoutes: TDashboarRoutes[] = [
     children: [
       {
         label: 'All Users',
-        path: '/admin-dashboard/users',
-      },
-      {
-        label: 'Blocked Users',
-        path: '/admin-dashboard/blocked-users',
-      },
-      {
-        label: 'Create Admin',
-        path: '/admin-dashboard/create-admin',
-      },
-      {
-        label: 'Manage Admins',
-        path: '/admin-dashboard/manage-admins',
-      },
+        path: '/admin-dashboard/all-users',
+      }
     ],
   },
   {
@@ -68,23 +56,12 @@ export const adminRoutes: TDashboarRoutes[] = [
         label: 'Content Engagement',
         path: '/admin-dashboard/content-engagement',
       },
-      {
-        label: 'Revenue Reports',
-        path: '/admin-dashboard/revenue-reports',
-      },
+
     ],
   },
   {
     label: 'Settings',
     children: [
-      {
-        label: 'Security Settings',
-        path: '/admin-dashboard/security-settings',
-      },
-      {
-        label: 'Notification Settings',
-        path: '/admin-dashboard/notification-settings',
-      },
       {
         label: 'Activity Logs',
         path: '/admin-dashboard/activity-logs',

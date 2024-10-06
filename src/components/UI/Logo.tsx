@@ -1,9 +1,10 @@
+import Link from "next/link";
 
 const Logo = () => {
   return (
-    <section>
+    <Link href={'/'}>
       Logo
-    </section>
+    </Link>
   );
 };
 
