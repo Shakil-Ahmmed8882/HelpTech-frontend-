@@ -15,14 +15,33 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/UI/theme-switch";
-import { Logo } from "@/src/components/icons";
+import { Logo, SearchIcon } from "@/src/components/icons";
 import NavbarDropdown from "./NavbarDropdown";
 import { useUser } from "@/src/context/user.provider";
 import { NotificationIcon, WriteIcon } from "@/src/assets/icons";
+import { Input } from "@nextui-org/input";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/src/lib/AxiosInstance";
+import { useGetAllPosts, useGetAllSearchedPosts } from "@/src/hooks/post.hook";
+import { SearchResults } from "./navbar/SearchResults";
 
-export const Navbar =  () => {
+export const Navbar = () => {
   const { user } = useUser();
+
+  // useState to track the search input value
+  const [searchValue, setSearchValue] = useState("");
   
+  const { data } = useGetAllSearchedPosts(searchValue);
+  const searchResults = data?.data || []
+  
+  // Handle the onChange event and log the value
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  // Fetch posts data when the search value changes
+
+
 
   return (
     <NextUINavbar className="!px-0 py-3" maxWidth="xl" position="sticky">
@@ -33,6 +52,7 @@ export const Navbar =  () => {
             <p className="font-bold text-inherit">HelpTech</p>
           </NextLink>
         </NavbarBrand>
+
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
@@ -51,13 +71,25 @@ export const Navbar =  () => {
         </ul>
       </NavbarContent>
 
+      {/* Search Input using basic useState */}
+      <div className="w-1/2">
+        <Input
+          value={searchValue} // Controlled input value
+          onChange={handleSearchChange} // Handle input change
+          placeholder="Search.."
+          startContent={<SearchIcon />}
+        />
+      </div>
+
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-4 items-center">
-          <Link className="text-default-600" href="/write"><WriteIcon/></Link>
-          <NotificationIcon/>
+          <Link className="text-default-600" href="/write">
+            <WriteIcon />
+          </Link>
+          <NotificationIcon />
           <ThemeSwitch />
         </NavbarItem>
         {user ? (
@@ -66,7 +98,12 @@ export const Navbar =  () => {
           </NavbarItem>
         ) : (
           <NavbarItem className="hidden sm:flex gap-2">
-            <Link className="p-2 px-5 rounded-full bg-primaryColor text-white" href="/login">Get started</Link>
+            <Link
+              className="p-2 px-5 rounded-full bg-primaryColor text-white"
+              href="/login"
+            >
+              Get started
+            </Link>
           </NavbarItem>
         )}
       </NavbarContent>
@@ -84,8 +121,8 @@ export const Navbar =  () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
+                    ? "danger"
+                    : "foreground"
                 }
                 href="#"
                 size="lg"
@@ -96,6 +133,19 @@ export const Navbar =  () => {
           ))}
         </div>
       </NavbarMenu>
+            {/* Search Results Section */}
+      {searchResults.length > 0 && <SearchResults results={searchResults} />}
+
+      
     </NextUINavbar>
   );
 };
+
+
+
+
+
+
+
+
+

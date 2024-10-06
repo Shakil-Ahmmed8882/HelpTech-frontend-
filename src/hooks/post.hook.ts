@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  getAllSearchedPosts,
   getOfMyPosts,
   getSinglePost,
   updatePost,
@@ -29,6 +30,16 @@ export const useGetAllPosts = () => {
     queryFn: async () => await getAllPosts(),
   });
 };
+
+
+export const useGetAllSearchedPosts = (searchValue: string) => {
+  return useQuery({
+    queryKey: ["GET_ALL_POSTS", searchValue],
+    queryFn: async () => await getAllSearchedPosts(searchValue), 
+    enabled: !!searchValue, // Only fetch when searchValue is provided
+  });
+};
+
 
 export const useGetAllOfMyPosts = () => {
   return useQuery({

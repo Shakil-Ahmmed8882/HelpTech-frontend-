@@ -57,6 +57,33 @@ export const getAllPosts = async () => {
   }
 };
 
+
+
+
+
+export const getAllSearchedPosts = async (searchTerm = "") => {
+  try {
+    const token = cookies().get("accessToken")?.value;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts?searchTerm=${encodeURIComponent(searchTerm)}`, {
+      method: "GET",
+      headers: {
+        Authorization: `${token}`,
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["POST"],
+      },
+    });
+    const data = await res.json();
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+
+
 export const getOfMyPosts = async () => {
   try {
     const token = cookies().get("accessToken")?.value;
