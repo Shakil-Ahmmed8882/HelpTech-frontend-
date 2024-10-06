@@ -157,7 +157,7 @@ export default function App() {
                 <h3 className="text-xl font-semibold mb-4">Followings</h3>
                 <ul className="grid grid-cols-2 gap-4">
                   {followingsArray?.map((following:any, index:number) => (
-                    <li key={following.id} className="flex items-center justify-between">
+                    <li key={index} className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
                         <Avatar src={following.profilePhoto} alt={following.name} size="lg" />
                         <div>

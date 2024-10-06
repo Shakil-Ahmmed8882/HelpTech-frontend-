@@ -6,8 +6,13 @@ import { cookies } from "next/headers";
 
 export const pay = async (amount:number) => {
     const token  = cookies().get("accessToken")?.value
-  try {
-    const { data } = await axiosInstance.post("/payments/pay", 
+
+    
+    console.log({token})
+    console.log({amount})
+    
+    try {
+      const { data } = await axiosInstance.post("/payments/pay", 
         { amount }, 
         {
           headers: {
@@ -16,9 +21,11 @@ export const pay = async (amount:number) => {
           }
         }
       );
-
+      console.log({data})
+      
       return data
-  } catch (error: any) {
+    } catch (error: any) {
+    console.log({error})
     throw new Error(error);
   }
 };

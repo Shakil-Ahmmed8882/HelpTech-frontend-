@@ -8,7 +8,7 @@ import DashboardCardSkeleton from "./(post-management)/my-posts/_components/Card
 // Content Analytics: Show share counts, reaction counts, comment counts and views counts on the User Dashboard for the overall posts.
 
 const UserDashboard = () => {
-  const { data,isLoading, isPending } = useGetUserActionCounts();
+  const { data, isLoading, isPending } = useGetUserActionCounts();
 
   // Assuming data has an array of actions
   const userActions = data?.data || [];
@@ -57,19 +57,31 @@ const UserDashboard = () => {
       </div>
 
       {/* Statistics Section */}
-      {
-        isLoading  ? <><DashboardCardSkeleton/></>: <>
-        
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
-        {userActions?.map((action) => (
-          <Statistics key={action.type} action={action} />
-        ))}
-      </div>
+      {isLoading ? (
+        <>
+          <DashboardCardSkeleton />
         </>
-      }
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+          {/* if user action found then display them else demo zero statistics */}
+          {userActions.length > 0
+            ? userActions.map((action, index) => (
+                <Statistics key={index} action={action} />
+              ))
+            : demoStatistics.map((action, index) => (
+                <Statistics key={index} action={action} />
+              ))}
+        </div>
+      )}
     </div>
   );
 };
+
+const demoStatistics = [
+  { type: "post", count: 0 },
+  { type: "comment", count: 0 },
+  { type: "upvotes", count: 0 },
+];
 
 export default UserDashboard;
 
@@ -81,9 +93,9 @@ interface ActionType {
 const Statistics = ({ action }: { action: ActionType }) => {
   return (
     <div className="bg-gradient-to-b dark:from-[#000000] to-[#fff] p-4 rounded-xl text-center">
-    <h3 className="text-sm text-default-900">{action.type}</h3>
-    <p className="text-4xl font-bold my-4 text-default-900">{action.count}</p>
-    <p className="text-green-500 text-sm mt-1">+2.6%</p>
-  </div>
+      <h3 className="text-sm text-default-900">{action.type}</h3>
+      <p className="text-4xl font-bold my-4 text-default-900">{action.count}</p>
+      <p className="text-green-500 text-sm mt-1">+2.6%</p>
+    </div>
   );
 };

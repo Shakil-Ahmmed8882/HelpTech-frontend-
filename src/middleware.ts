@@ -51,8 +51,6 @@ export async function middleware(request: NextRequest) {
     const routes = generalProtectedRoutes[user?.role as Role];
     if (routes.some((route) => pathname.match(route))) {// start with /post 
       return NextResponse.next();
-    }else {
-      return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
     }
   }
 
