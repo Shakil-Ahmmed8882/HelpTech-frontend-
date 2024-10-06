@@ -11,6 +11,7 @@ import { Button } from "@nextui-org/button";
 
 export default function Landing() {
   
+  const {user} = useUser()
   const { data, isLoading } = useGetAllPosts();
   const allPosts = data?.data;
   
@@ -23,6 +24,11 @@ export default function Landing() {
       ) : (
         <>
           <div>
+
+          {
+            !user?<Container><p>Login</p></Container>:<>
+            
+            <Container>
             <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
               <section className="md:w-[65%] relative min-h-screen">
               <Category/>
@@ -44,6 +50,11 @@ export default function Landing() {
                 </div>
               </aside>
             </main>
+
+            </Container>
+            </>
+          }
+            
           </div>
         </>
       )}
@@ -143,6 +154,8 @@ import { useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
 import { PostHorizontalSkeleton } from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/PostSkeleton";
 import Category from "./_components/Tags";
+import { useUser } from "@/src/context/user.provider";
+import Container from "../../UI/Container";
 
 
 

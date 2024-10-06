@@ -8,8 +8,13 @@ const AuthRoutes = ["/login", "/register"];
 type Role = keyof typeof roleBasedRoutes;
 
 const roleBasedRoutes = {
-  USER: [/^\/profile/],
-  ADMIN: [/^\/admin/],
+  user: [/^\/user-dashboard/],
+  admin: [/^\/admin-dashboard/],
+};
+
+const generalProtectedRoutes = {
+  admin: [/^\/post/],
+  user:[/^\/post/] ,
 };
 
 
@@ -40,10 +45,25 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // if try to go route startwith post without login redirect 
+  // first to login then let user go 
+  if (user && user?.role) {
+    const routes = generalProtectedRoutes[user?.role as Role];
+    if (routes.some((route) => pathname.match(route))) {// start with /post 
+      return NextResponse.next();
+    }else {
+      return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
+    }
+  }
+
   return NextResponse.redirect(new URL("/", request.url));
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/login", "/register"],
+  matcher: ["/post/:page*","/user-dashboard/:page*", "/admin-dashboard/:page*" , "/login", "/register"],
 };
+
+
+
+
