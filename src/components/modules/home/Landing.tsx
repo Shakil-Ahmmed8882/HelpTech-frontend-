@@ -10,12 +10,9 @@ import {
 import { Button } from "@nextui-org/button";
 
 export default function Landing() {
-  
-  const {user} = useUser()
+  const { user } = useUser();
   const { data, isLoading } = useGetAllPosts();
   const allPosts = data?.data;
-  
-
 
   return (
     <>
@@ -24,37 +21,36 @@ export default function Landing() {
       ) : (
         <>
           <div>
+            {!user ? (
+              <LoginDemo />
+            ) : (
+              <>
+                <Container>
+                  <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
+                    <section className="md:w-[65%] relative min-h-screen">
+                      <Category />
+                      {allPosts?.map((post: IPost) => (
+                        <Post key={post._id} post={post} />
+                      ))}
+                    </section>
+                    <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0">
+                      <div className="py-2">
+                        <h2 className="text-3xl font-bold">Trending</h2>
+                        <p className="pt-3 text-default-700">
+                          {" "}
+                          adipisicing elit. Velit nulla excepturi illum a
+                          reiciendis. Neque quia odio ipsam? Porro repellendus
+                          expedita voluptates quia quod omnis aspernatur
+                          mollitia animi accusantium quo?
+                        </p>
 
-          {
-            !user?<Container><p>Login</p></Container>:<>
-            
-            <Container>
-            <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
-              <section className="md:w-[65%] relative min-h-screen">
-              <Category/>
-                {allPosts?.map((post: IPost) => (
-                  <Post key={post._id} post={post} />
-                ))}
-              </section>
-              <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0">
-                <div className="py-2">
-                  <h2 className="text-3xl font-bold">Trending</h2>
-                  <p className="pt-3 text-default-700">
-                    {" "}
-                    adipisicing elit. Velit nulla excepturi illum a reiciendis.
-                    Neque quia odio ipsam? Porro repellendus expedita voluptates
-                    quia quod omnis aspernatur mollitia animi accusantium quo?
-                  </p>
-
-                  <StaffPicks />
-                </div>
-              </aside>
-            </main>
-
-            </Container>
-            </>
-          }
-            
+                        <StaffPicks />
+                      </div>
+                    </aside>
+                  </main>
+                </Container>
+              </>
+            )}
           </div>
         </>
       )}
@@ -75,10 +71,6 @@ export function Post({ post }: { post: IPost }) {
     content,
     upvotes,
     downvotes,
-    isPremium,
-    views,
-    pdfVersion,
-    isDeleted,
     images,
     comments,
   } = post || {};
@@ -98,7 +90,7 @@ export function Post({ post }: { post: IPost }) {
             <div
               dangerouslySetInnerHTML={{ __html: content }}
               className="text-default-500 text-lg"
-             />
+            />
 
             <section className="flex justify-between items-center">
               <p className="text-sm text-default-500">1d ago</p>
@@ -157,8 +149,6 @@ import Category from "./_components/Tags";
 import { useUser } from "@/src/context/user.provider";
 import Container from "../../UI/Container";
 
-
-
 const StaffPicks = () => {
   return (
     <div className="w-full max-w-xs">
@@ -173,7 +163,7 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-           />
+          />
         </div>
         <div>
           <p className="text-sm">
@@ -194,7 +184,7 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-           />
+          />
         </div>
         <div>
           <p className="text-sm">
@@ -215,7 +205,7 @@ const StaffPicks = () => {
           <Avatar
             className="w-8 h-8 mr-3"
             src="https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"
-           />
+          />
         </div>
         <div>
           <p className="text-sm">
@@ -376,5 +366,31 @@ const StaffPicks = () => {
         </main>
       </div>
     </div>
+  );
+};
+
+import loginImage from "@/src/assets/images/login/login.png";
+const LoginDemo = () => {
+  return (
+    <Container>
+      <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-3">
+        <div className="w-full md:w-2/4 flex flex-col justify-center items-start space-y-4">
+          <h2 className="text-4xl md:text-5xl leading-[40px] md:leading-[60px] font-bold">
+            Sign In to Unlock Exclusive Content
+          </h2>
+          <p className="text-lg text-default-500 pb-5">
+            Sign in now to enjoy personalized recommendations, early access to
+            new releases, and much more.
+          </p>
+          <Button className="border border-primaryColor mt-8 bg-black text-white py-2 px-4 w-1/2">
+            <Link href="/login">Sign In Now</Link>
+          </Button>
+        </div>
+
+        <div className="w-full md:w-2/4">
+          <Image width={500} height={500} src={loginImage} alt="login-vector" />
+        </div>
+      </div>
+    </Container>
   );
 };
