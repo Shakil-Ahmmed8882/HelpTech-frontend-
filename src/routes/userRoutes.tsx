@@ -53,18 +53,18 @@ export const userRoutes: TDashboarRoutes[] = [
     },
     {
       label: 'Premium Content',
-      path: '/user-dashboard/premium',
+      path: '/user-dashboard/premium-contents',
     },
     {
       label: 'Settings',
       children: [
         {
           label: 'Privacy Settings',
-          path: '/user-dashboard/settings-privacy',
+          path: '/user-dashboard/privacy-settings',
         },
         {
           label: 'Notification Preferences',
-          path: '/user-dashboard/settings-notifications',
+          path: '/user-dashboard/notification-settings',
         },
       ],
     },

@@ -26,6 +26,7 @@ export default function AllUsers() {
           <TableColumn>Name</TableColumn>
           <TableColumn>Profile Photo</TableColumn>
           <TableColumn>Email</TableColumn>
+          <TableColumn>Status</TableColumn>
           <TableColumn align="center">Actions</TableColumn>
         </TableHeader>
         <TableBody>
@@ -42,9 +43,11 @@ export default function AllUsers() {
                 />
               </TableCell>
               <TableCell>{user.email}</TableCell>
+              <TableCell className={`${user.status === "ACTIVE"?"text-[#28bb28]":"text-[#de2581]"}`}>{user.status}</TableCell>
               <TableCell>
-                <ThreeDotMenu userId={user._id} /> 
+                <ThreeDotMenu user={user} userId={user._id} /> 
               </TableCell>
+           
             </TableRow>
           ))}
         </TableBody>

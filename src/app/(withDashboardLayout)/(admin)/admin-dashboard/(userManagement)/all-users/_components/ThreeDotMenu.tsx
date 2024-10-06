@@ -4,15 +4,20 @@
 import React, { useState, useRef } from "react";
 import useClickOutside from "@/src/hooks"; // Ensure you have this hook or import from wherever it's defined
 import { useDeleteUser } from "@/src/hooks/admin.analytics.hook";
+import { useUpdateUserInfo } from "@/src/hooks/auth.hook";
+import { IUser } from "@/src/types";
 
 interface ThreeDotMenuProps {
   userId: string;
+  user: IUser
 }
 
-const ThreeDotMenu = ({ userId }: ThreeDotMenuProps) => {
+const ThreeDotMenu = ({ userId,user }: ThreeDotMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const userBlockDeleteRef = useRef(null);
   const { mutate: handleDeleteUserById} = useDeleteUser();
+  const { mutate: handleEditUserInfo, data: updateduserInfo } = useUpdateUserInfo();
+
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
@@ -20,8 +25,10 @@ const ThreeDotMenu = ({ userId }: ThreeDotMenuProps) => {
   // Handle outside click to close menu
   useClickOutside(userBlockDeleteRef, () => setIsOpen(false));
 
+
+  const userData = {status :user.status ==="BLOCKED"?"ACTIVE":"BLOCKED"}
   const handleBlockUser = async () => {
-    console.log(`Blocking user with ID: ${userId}`);
+    handleEditUserInfo({ id: userId, userData});
     setIsOpen(false);
   };
 
@@ -45,7 +52,7 @@ const ThreeDotMenu = ({ userId }: ThreeDotMenuProps) => {
             onClick={handleBlockUser}
             className="cursor-pointer px-4 py-2 text-default-900 hover:bg-default-200"
           >
-            Block User
+            {user.status ==="BLOCKED"?"Activate user":"Block User"}
           </li>
           <li
             onClick={handleDeleteUser}

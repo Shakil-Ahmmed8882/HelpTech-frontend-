@@ -58,7 +58,7 @@ export const getCurrentUser = async () => {
 };
 
 export const getDBStoredUser = async (id: string) => {
-  const { data } = await axiosInstance.get(`/user/${id}`);
+  const { data } = await axiosInstance.get(`/users/${id}`);
   
   
   return data;
@@ -87,10 +87,17 @@ export const getNewAccessToken = async () => {
 
 export const updateUserInfo = async (id:string,userData: FieldValues) => {
 
+  
+
   try {
-    const { data } = await axiosInstance.post(`/user/${id}`, userData);
+    const { data } = await axiosInstance.put(`/users/${id}`, userData);
+
+    // Now issue is when admin change status that user token is set in cookied
+    // and admin become that user as we call the function in 2 differnt component
+    // when user update profile he/she won't pass status so by checking this we ensure 
+    // when admin using this function not to set cookie in browser 
+    if(userData.status) return ; 
     if (data.success) {
-      
       cookies().set("accessToken", data?.data?.accessToken);
     }
     return data;

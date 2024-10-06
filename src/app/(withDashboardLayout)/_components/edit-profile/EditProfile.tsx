@@ -2,12 +2,10 @@
 
 import HTForm from "@/src/components/form/HTForm";
 import HTInput from "@/src/components/form/HTInput";
-import envConfig from "@/src/config/envConfig";
 import { useUser } from "@/src/context/user.provider";
 import { useUpdateUserInfo } from "@/src/hooks/auth.hook";
 import { uploadToImageBB } from "@/src/utils/uploadImage";
 import { Button } from "@nextui-org/button";
-import axios from "axios";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const EditProfile = () => {
