@@ -4,11 +4,12 @@ import { useUser } from "@/src/context/user.provider";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader } from "@nextui-org/card";
-import { Input } from "@nextui-org/input";
+import { Input, Textarea } from "@nextui-org/input";
 import Image from "next/image";
 import badge from "@/src/assets/images/icons/badge.png";
 import FollowersAndPost from "@/src/app/(withDashboardLayout)/(user)/user-dashboard/profile/_components/FollowersAndPost";
-
+import star from "@/src/assets/images/icons/star.png";
+import { Badge } from "@nextui-org/badge";
 
 export default function Profile() {
   const { user } = useUser();
@@ -32,8 +33,10 @@ export default function Profile() {
         <div className="absolute bottom-0 left-4 transform translate-y-1/2">
           <Avatar
             src={user?.profilePhoto}
-            className="w-24 h-24 border-4 border-white"
-          />
+            className="w-24 relative h-24 border-4 border-white"
+          >
+          </Avatar>
+          
         </div>
       </div>
       <div className="p-4 pt-16">
@@ -42,20 +45,28 @@ export default function Profile() {
             <div className="flex gap-2 items-center">
               <h1 className="text-xl font-bold">{user?.username}</h1>
               <Image className="size-5" src={badge} alt="blue tick" />
+              
+              {
+                user && user.isPremiumUser && 
+              <>
+              <Image width={100} height={100} className="w-6 h-6" alt="premiumBadge" src={star} />
+              <PremiumUserBadge/>
+              </>
+              }
             </div>
             <p className="text-sm text-gray-500">@{user?.username}</p>
           </div>
           <Button>Notifications</Button>
         </div>
         <FollowersAndPost id={user?._id || ""} />
-        <Card className="mt-4">
-          <CardHeader className="pb-2">
+        <Card className="my-10 bg-transparent">
+          <CardHeader className="pb-6 pt-3">
             <h2 className="text-lg font-semibold">What are you thinking?</h2>
           </CardHeader>
           <div>
-            <Input placeholder="Dream interpretation has many forms..." />
-            <div className="flex justify-between items-center mt-2">
-              <Button>Tweet</Button>
+            <Textarea className="" placeholder="Dream interpretation has many forms..." />
+            <div className="flex  items-center mt-5">
+              <Button className="bg-primaryColor text-white">Post</Button>
             </div>
           </div>
         </Card>
@@ -115,4 +126,12 @@ export default function Profile() {
       </div>
     </div>
   );
+}
+
+
+
+export const PremiumUserBadge = () => {
+  return (
+    <p className=" p-[5px] px-4 bg-[#fec61e29] text-[#fec61e] text-sm   rounded-full">Premium</p>
+  )
 }
