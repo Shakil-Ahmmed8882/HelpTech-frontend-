@@ -23,8 +23,6 @@ const JoditEditor = dynamic(() => import("jodit-react"), {
 export default function CreatePost({redirect}:{redirect:string | undefined}) {
 
 
-  
-
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const [content, setContent] = useState("");
@@ -52,11 +50,8 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
       tags: [data?.tags],
       images: [imageUrl],
       content,
+      isPremium:data.ispremium === "true" ? true : false
     };
-
-
-    
-
 
     handleCreatePost(postData);
   };
@@ -107,6 +102,12 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
                 <div className="min-w-fit flex-1">
                   <HTSelect label="Tags" name="tags" options={tagOptions} />
                 </div>
+              
+              </div>
+              <div className="space-y-3 md:space-y-0 md:flex flex-wrap gap-2 py-6">
+                <div className="min-w-fit flex-1">
+                  <HTSelect label="is it premium?" name="isPremium" options={isPremiumOptions} />
+                </div>
                 <div className="min-w-fit flex-1">
                   <label
                     className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
@@ -122,6 +123,7 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
                     onChange={(e) => handleImageChange(e)}
                   />
                 </div>
+              
               </div>
 
               {imagePreviews.length > 0 && (
@@ -166,6 +168,11 @@ const categoryOptions = [
   { label: "Technology", key: "Technology" },
   { label: "Health", key: "Health" },
   { label: "Travel", key: "Travel" },
+];
+
+const isPremiumOptions = [
+  { label: "Yes it's premium", key: "true" },
+  { label: "No it's not premium", key: "false" },
 ];
 
 const tagOptions = [

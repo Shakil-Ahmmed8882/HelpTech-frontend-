@@ -2,6 +2,7 @@
 
 import axiosInstance from "@/src/lib/AxiosInstance";
 import { IPost } from "@/src/types";
+import { PostsResponse } from "@/src/types/post.type";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -38,14 +39,15 @@ export const deletePost = async (id: string) => {
 
 
 // Fetch all posts, optionally filtered by category 
-export const getAllPosts = async (category: string) => {
+export const getAllPosts = async (category: string):Promise<PostsResponse> => {
   try {
     const token = cookies().get("accessToken")?.value;
 
-    // Construct API URL based on query parameter
-    const apiUrl = category
-      ? `${process.env.NEXT_PUBLIC_BASE_API}/posts?category=${category}`
-      : `${process.env.NEXT_PUBLIC_BASE_API}/posts`;
+    // if cateory is all or intially null fetch all data
+    const apiUrl = category && category !== "all" && category !== "null" && category !== ""
+  ? `${process.env.NEXT_PUBLIC_BASE_API}/posts?category=${category}`
+  : `${process.env.NEXT_PUBLIC_BASE_API}/posts`;
+
 
     const res = await fetch(apiUrl, {
       method: "GET",
@@ -56,8 +58,9 @@ export const getAllPosts = async (category: string) => {
       next: {
         tags: ["POST"],
       },
+      
     });
-
+    revalidateTag("POST");
     const data = await res.json();
     return data;
   } catch (error: any) {

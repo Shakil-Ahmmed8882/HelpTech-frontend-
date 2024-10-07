@@ -7,12 +7,12 @@ export const useAddFollows = () => {
   return useMutation({
     mutationKey: ["ADD_FOLLOWS"],
     mutationFn: async (followData: any) => await addFollow(followData),
-    onSuccess: () => {
-      return (
-        toast.success("Followed"),    
-        revalidateTag("FOLLOWS")      
-      )
-    },
+    // onSuccess: () => {
+    //   return (
+    //     toast.success("Followed"),    
+    //     revalidateTag("FOLLOWS")      
+    //   )
+    // },
   });
 };
 
@@ -22,7 +22,7 @@ export const useAddFollows = () => {
     return useMutation({
         mutationKey: ["IS_FOLLOWING"],
         mutationFn: async(isFollowingData:any) => await isFollowing(isFollowingData),
-        onSuccess: () => toast.success("unfollowed")
+        // onSuccess: () => toast.success("unfollowed")
     })
 
 }
@@ -31,7 +31,7 @@ export const useAddFollows = () => {
     return useMutation({
         mutationKey: ["UNFOLLOW"],
         mutationFn: async(id:string) => await unfollow(id),
-        onSuccess: () => toast.success("unfollowed")
+        // onSuccess: () => toast.success("unfollowed")
     })
 
 }

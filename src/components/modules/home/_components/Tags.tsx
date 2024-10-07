@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const categories = [
+  { id: 1, name: "All", tag: "all" },
   { id: 1, name: "Technology", tag: "Technology" },
   { id: 2, name: "Software", tag: "Software" },
   { id: 3, name: "Health", tag: "health" },
@@ -36,14 +37,14 @@ const Category = () => {
 
 
   return (
-    <div className="flex flex-wrap space-y-2 space-x-4 border-b border-gray-200 pt-5 pb-14">
+    <div className="flex flex-wrap gap-y-8 mb-5 gap-x-5 border-b border-default-200 pt-5 pb-8 ">
       {categories.map((tag) => (
         <button
           key={tag.id}
           className={`pb-2 px-4 text-sm font-medium ${
             activeTag === tag.tag
-              ? "text-primaryColor border-b-2 border-primaryColor"
-              : "text-gray-500 hover:primaryColor"
+              ? "bg-primaryColor text-white rounded-full"
+              : "text-default-500 hover:primaryColor"
           }`}
           onClick={() => handleTagClick(tag.tag)}
         >

@@ -10,53 +10,55 @@ import {
 import { Button } from "@nextui-org/button";
 
 export default function Landing() {
-  const { user } = useUser();
-  const params = useSearchParams()
-  const category = params.get('category')
+  const { user,isLoading:isUserLoading } = useUser();
+  const params = useSearchParams();
+  const category = params.get("category");
   const { data, isLoading } = useGetAllPosts(`${category}`);
   const allPosts = data?.data;
+  
+  
 
   return (
     <>
-      {isLoading ? (
-        <PostHorizontalSkeleton />
+    <div>
+      {/* Handle user loading state */}
+      {isUserLoading ? (
+        <HomeLayoutSkeleton/>
+      ) : !user ? (
+        <LoginDemo />
       ) : (
         <>
-          <div>
-            {!user ? (
-              <LoginDemo />
-            ) : (
-              <>
-                <Container>
-                  <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
-                    <section className="md:w-[65%] relative min-h-screen">
-                      <Category />
-                      {allPosts?.map((post: IPost) => (
-                        <Post key={post._id} post={post} />
-                      ))}
-                    </section>
-                    <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0">
-                      <div className="py-2">
-                        <h2 className="text-3xl font-bold">Trending</h2>
-                        <p className="pt-3 text-default-700">
-                          {" "}
-                          adipisicing elit. Velit nulla excepturi illum a
-                          reiciendis. Neque quia odio ipsam? Porro repellendus
-                          expedita voluptates quia quod omnis aspernatur
-                          mollitia animi accusantium quo?
-                        </p>
+          <Container>
+            <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
+              <section className="md:w-[65%] relative min-h-screen">
+                <Category /> {/* Static content */}
+                {isLoading ? (
+                  <PostHorizontalSkeleton /> // Only the post section will show a skeleton
+                ) : (
+                  allPosts?.map((post: IPost) => (
+                    <Post key={post._id} post={post} />
+                  ))
+                )}
+              </section>
 
-                        <StaffPicks />
-                      </div>
-                    </aside>
-                  </main>
-                </Container>
-              </>
-            )}
-          </div>
+              {/* Static aside content like StaffPicks remains outside of isLoading */}
+              <aside className="hidden md:block border-l border-default-100 p-4 w-[35%] min-h-screen sticky top-0">
+                <div className="py-2">
+                  <h2 className="text-3xl font-bold">Top Picks</h2>
+                  <p className="pt-3 text-default-700">
+                    Handpicked content just for you. These articles are making
+                    waves and are highly recommended by our experts.
+                  </p>
+
+                  <StaffPicks />
+                </div>
+              </aside>
+            </main>
+          </Container>
         </>
       )}
-    </>
+    </div>
+  </>
   );
 }
 
@@ -65,7 +67,6 @@ import { Card, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 
 export function Post({ post }: { post: IPost }) {
-  
   const {
     _id,
     title,
@@ -374,6 +375,7 @@ const StaffPicks = () => {
 
 import loginImage from "@/src/assets/images/login/login.png";
 import { useSearchParams } from "next/navigation";
+import HomeLayoutSkeleton from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/homeLayoutSkeleton";
 const LoginDemo = () => {
   return (
     <Container>

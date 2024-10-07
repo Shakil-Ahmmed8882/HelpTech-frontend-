@@ -1,54 +1,84 @@
-"use client"
+"use client";
 
-// AllUsers.tsx
+// AllPosts.tsx
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Image } from "@nextui-org/react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Image,
+} from "@nextui-org/react";
 import TableSkeleton from "@/src/components/skeleton/TableSkeleton";
-import { useGetAllUsers } from "@/src/hooks/admin.analytics.hook";
-import ThreeDotMenu from "../../(userManagement)/all-users/_components/ThreeDotMenu";
+import { useGetAllPosts } from "@/src/hooks/post.hook";
+
+import { IPost } from "@/src/types";
+import DeletePost from "./_components/DeletePost";
 
 
-
-// change this user data by post data
+// Main AllPosts Component
 export default function AllPosts() {
-  const { data, isLoading } = useGetAllUsers();
+  const { data, isLoading } = useGetAllPosts("all");
 
   if (isLoading) return <TableSkeleton />;
 
-  const users: any[] = data?.data ?? [];
-  if (users.length === 0) {
-    return <p>No users available</p>;
+  const posts = data?.data ?? [];
+
+  if (posts.length === 0) {
+    return <p>No posts available</p>;
   }
 
+  console.log(posts);
+
   return (
-    <div className="!min-h-screen">
-      <Table aria-label="Users Table">
+    <div className="!min-h-screen px-4">
+      <Table aria-label="Posts Table">
         <TableHeader>
-          <TableColumn>Name</TableColumn>
-          <TableColumn>Profile Photo</TableColumn>
-          <TableColumn>Email</TableColumn>
-          <TableColumn>Status</TableColumn>
-          <TableColumn align="center">Actions</TableColumn>
+          <TableColumn>Post Image</TableColumn>
+          <TableColumn>Title</TableColumn>
+          <TableColumn>Author Image</TableColumn>
+          <TableColumn>Author Name</TableColumn>
+          <TableColumn>Category</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
-          {users.map((user) => (
-            <TableRow key={user._id}>
-              <TableCell>{user.username}</TableCell>
+          {posts.map((post: IPost) => (
+            <TableRow key={post._id}>
               <TableCell>
-                <Image
-                  alt={user.username}
-                  src={user.profilePhoto}
-                  width={50}
-                  height={50}
-                  className="object-cover"
-                />
+                {post.images?.[0] && (
+                  <Image
+                    alt={post?.title}
+                    src={post?.images[0]}
+                    width={50}
+                    height={50}
+                    className="object-cover"
+                  />
+                )}
               </TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell className={`${user.status === "ACTIVE"?"text-[#28bb28]":"text-[#de2581]"}`}>{user.status}</TableCell>
+              <TableCell>{post.title}</TableCell>
+
+              {/* Author Image */}
               <TableCell>
-                <ThreeDotMenu user={user} userId={user._id} /> 
+                {post.author?.profilePhoto && (
+                  <Image
+                    alt={post.author.username}
+                    src={post.author.profilePhoto}
+                    width={50}
+                    height={50}
+                    className="object-cover rounded-full"
+                  />
+                )}
               </TableCell>
-           
+              <TableCell>{post?.author?.username}</TableCell>
+              <TableCell>{post.category}</TableCell>
+
+              {/* Table action  */}
+              <TableCell className="flex gap-3">
+                
+                <DeletePost postId={post?._id} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

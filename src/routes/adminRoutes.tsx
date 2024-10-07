@@ -7,6 +7,10 @@ export const adminRoutes: TDashboarRoutes[] = [
     path: '/admin-dashboard/',
   },
   {
+    label: 'Profile',
+    path: '/admin-dashboard/profile',
+  },
+  {
     label: 'User Management',
     children: [
       {
@@ -18,6 +22,10 @@ export const adminRoutes: TDashboarRoutes[] = [
   {
     label: 'Post Management',
     children: [
+      {
+        label: 'Create Post',
+        path: '/admin-dashboard/create-post',
+      },
       {
         label: 'All Posts',
         path: '/admin-dashboard/all-posts',
