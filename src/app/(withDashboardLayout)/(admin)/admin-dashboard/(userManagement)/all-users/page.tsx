@@ -14,7 +14,6 @@ export default function AllUsers() {
   if (isLoading) return <TableSkeleton />;
 
   const users: any[] = data?.data ?? [];
-
   if (users.length === 0) {
     return <p>No users available</p>;
   }

@@ -49,6 +49,7 @@
 		"intl-messageformat": "^10.5.0",
 		"jodit": "^4.2.27",
 		"jodit-react": "^4.1.2",
+		"js-cookie": "^3.0.5",
 		"jwt-decode": "^4.0.0",
 		"lightgallery": "^2.7.2",
 		"nexios-http": "^1.1.21",
@@ -65,6 +66,7 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
+		"@types/js-cookie": "^3.0.6",
 		"@types/node": "20.5.7",
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.0",

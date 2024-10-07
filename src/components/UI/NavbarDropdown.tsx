@@ -14,6 +14,8 @@ import { useUser } from "@/src/context/user.provider";
 import { protectedRoutes } from "@/src/constants";
 import { logout } from "@/src/services/authService";
 
+
+
 export default function NavbarDropdown() {
   const router = useRouter();
   const { setIsLoading: UserLoading, user } = useUser();
@@ -33,6 +35,7 @@ export default function NavbarDropdown() {
   };
 
   return (
+    
     <Dropdown>
       <DropdownTrigger>
         <Avatar className="cursor-pointer" size="sm" src={user?.profilePhoto} />
@@ -60,5 +63,6 @@ export default function NavbarDropdown() {
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
+    
   );
 }

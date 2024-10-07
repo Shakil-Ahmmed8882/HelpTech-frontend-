@@ -1,7 +1,9 @@
 "use client"
 
+import { LeftArrowIcon } from '@/src/assets/icons'
 import { usePay } from '@/src/hooks/payment.hook'
 import { Button } from '@nextui-org/button'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function PricingPlan() {
@@ -26,6 +28,7 @@ export default function PricingPlan() {
 
   return (
     <div className="bg-primaryColor text-white p-8 min-h-screen">
+      <Link href={'/'} className='bg-white p-3 rounded-full absolute left-5 top-5 text-black'>Back to home</Link>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-4 text-center">Get Started Now,<br />Pick a Plan Later</h1>
         <p className="text-center mb-8">Try Premium free for 7 days and get unrestricted<br />access to all our tools, resources, and community features.</p>

@@ -63,6 +63,7 @@ import { Card, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 
 export function Post({ post }: { post: IPost }) {
+  
   const {
     _id,
     title,

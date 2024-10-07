@@ -62,6 +62,7 @@ export interface IUser {
   status?: string;
   mobileNumber?: string;
   profilePhoto?: string;
+  isPremiumUser: boolean;
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
