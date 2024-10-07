@@ -15,8 +15,10 @@ import TableSkeleton from "@/src/components/skeleton/TableSkeleton";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 
 import { IPost } from "@/src/types";
-import DeletePost from "./_components/DeletePost";
+import { PostsResponse } from "@/src/types/post.type";
 
+import DeletePost from "./_components/DeletePost";
+// import ThreeDotMenu from "../../(userManagement)/all-users/_components/ThreeDotMenu";
 
 // Main AllPosts Component
 export default function AllPosts() {
@@ -76,7 +78,6 @@ export default function AllPosts() {
 
               {/* Table action  */}
               <TableCell className="flex gap-3">
-                
                 <DeletePost postId={post?._id} />
               </TableCell>
             </TableRow>

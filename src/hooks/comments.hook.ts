@@ -18,13 +18,6 @@ export const useGetAllCommentsOnSinglePost = (id: string) => {
     return useMutation({
         mutationKey: ["ADD_COMMENT"],
         mutationFn: async(commentData:any) => await addComment(commentData),
-        onSuccess: ()=>{
-            revalidateTag("SINGLE_POST_COMMENT")
-            toast.success("Comment is added successully")
-        },
-        onError: (error)=>{
-            toast.success(error.message)
-        }
     })
 
 }

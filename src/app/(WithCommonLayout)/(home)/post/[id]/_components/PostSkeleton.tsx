@@ -20,7 +20,7 @@ export default PostSkeleton;
 export const PostHorizontalSkeleton = () => {
   return (
     
-      <section className=" mx-auto">
+      <section className=" mx-auto sticky top-0 h-screen">
         <main className="flex gap-3 w-full ">
           <div className="w-full">
             {/* 1 */}

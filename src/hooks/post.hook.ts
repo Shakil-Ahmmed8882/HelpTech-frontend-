@@ -26,7 +26,7 @@ export const useCreatePost = () => {
 
 
 
-export const useGetAllPosts = (category: string) => {
+export const useGetAllPosts = (category: string | null) => {
   return useQuery({
     queryKey: ["GET_ALL_POSTS", category], 
     queryFn: async () => {
@@ -34,7 +34,7 @@ export const useGetAllPosts = (category: string) => {
       const response = await getAllPosts(category);
       return response;
     },
-    enabled: !!category, 
+    enabled: !!category , 
   });
 };
 

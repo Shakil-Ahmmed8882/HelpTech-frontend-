@@ -4,12 +4,12 @@ import { useUser } from "@/src/context/user.provider";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader } from "@nextui-org/card";
-import { Input, Textarea } from "@nextui-org/input";
+import { Textarea } from "@nextui-org/input";
 import Image from "next/image";
 import badge from "@/src/assets/images/icons/badge.png";
 import FollowersAndPost from "@/src/app/(withDashboardLayout)/(user)/user-dashboard/profile/_components/FollowersAndPost";
 import star from "@/src/assets/images/icons/star.png";
-import { Badge } from "@nextui-org/badge";
+
 
 export default function Profile() {
   const { user } = useUser();
@@ -44,7 +44,9 @@ export default function Profile() {
           <div>
             <div className="flex gap-2 items-center">
               <h1 className="text-xl font-bold">{user?.username}</h1>
-              <Image className="size-5" src={badge} alt="blue tick" />
+              
+                 <Image className="size-5" src={badge} alt="blue tick" />
+              
               
               {
                 user && user.isPremiumUser && 
