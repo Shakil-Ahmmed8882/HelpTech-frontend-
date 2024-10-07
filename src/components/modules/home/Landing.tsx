@@ -11,7 +11,9 @@ import { Button } from "@nextui-org/button";
 
 export default function Landing() {
   const { user } = useUser();
-  const { data, isLoading } = useGetAllPosts();
+  const params = useSearchParams()
+  const category = params.get('category')
+  const { data, isLoading } = useGetAllPosts(`${category}`);
   const allPosts = data?.data;
 
   return (
@@ -371,6 +373,7 @@ const StaffPicks = () => {
 };
 
 import loginImage from "@/src/assets/images/login/login.png";
+import { useSearchParams } from "next/navigation";
 const LoginDemo = () => {
   return (
     <Container>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React  from "react";
 import { Tabs, Tab, Card, CardBody, Button, Avatar } from "@nextui-org/react";
 import { useAddFollows, useGetAllFollowersOfSingleUser, useGetAllFollowingsOfSingleUser, useIsFollowing, useUnfollow } from "@/src/hooks/follows.hook";
 import { useUser } from "@/src/context/user.provider";

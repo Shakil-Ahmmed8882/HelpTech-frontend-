@@ -24,10 +24,17 @@ export const useCreatePost = () => {
   });
 };
 
-export const useGetAllPosts = () => {
+
+
+export const useGetAllPosts = (category: string) => {
   return useQuery({
-    queryKey: ["GET_ALL_POSTS"],
-    queryFn: async () => await getAllPosts(),
+    queryKey: ["GET_ALL_POSTS", category], 
+    queryFn: async () => {
+      if (!category) return; 
+      const response = await getAllPosts(category);
+      return response;
+    },
+    enabled: !!category, 
   });
 };
 

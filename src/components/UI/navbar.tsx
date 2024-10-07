@@ -20,9 +20,8 @@ import NavbarDropdown from "./NavbarDropdown";
 import { useUser } from "@/src/context/user.provider";
 import { NotificationIcon, WriteIcon } from "@/src/assets/icons";
 import { Input } from "@nextui-org/input";
-import { useEffect, useState } from "react";
-import axiosInstance from "@/src/lib/AxiosInstance";
-import { useGetAllPosts, useGetAllSearchedPosts } from "@/src/hooks/post.hook";
+import { useState } from "react";
+import {  useGetAllSearchedPosts } from "@/src/hooks/post.hook";
 import { SearchResults } from "./navbar/SearchResults";
 
 export const Navbar = () => {

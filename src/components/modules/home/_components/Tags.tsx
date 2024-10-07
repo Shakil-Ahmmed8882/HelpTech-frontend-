@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const categories = [
-  { id: 1, name: "Technology", tag: "technology" },
-  { id: 2, name: "Software", tag: "software" },
+  { id: 1, name: "Technology", tag: "Technology" },
+  { id: 2, name: "Software", tag: "Software" },
   { id: 3, name: "Health", tag: "health" },
   { id: 4, name: "Mindfulness", tag: "mindfulness" },
   { id: 5, name: "Startups", tag: "startups" },

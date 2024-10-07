@@ -25,7 +25,7 @@ export const updatePost = async (id: string, postData: any) => {
   }
 };
 
-// Delete post 
+// Delete post
 export const deletePost = async (id: string) => {
   try {
     const { data } = await axiosInstance.delete(`/posts/${id}`);
@@ -36,10 +36,18 @@ export const deletePost = async (id: string) => {
   }
 };
 
-export const getAllPosts = async () => {
+
+// Fetch all posts, optionally filtered by category 
+export const getAllPosts = async (category: string) => {
   try {
     const token = cookies().get("accessToken")?.value;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts`, {
+
+    // Construct API URL based on query parameter
+    const apiUrl = category
+      ? `${process.env.NEXT_PUBLIC_BASE_API}/posts?category=${category}`
+      : `${process.env.NEXT_PUBLIC_BASE_API}/posts`;
+
+    const res = await fetch(apiUrl, {
       method: "GET",
       headers: {
         Authorization: `${token}`,
@@ -49,31 +57,32 @@ export const getAllPosts = async () => {
         tags: ["POST"],
       },
     });
-    const data = await res.json();
 
+    const data = await res.json();
     return data;
   } catch (error: any) {
     throw new Error(error);
   }
 };
 
-
-
-
+// =============================================================
 
 export const getAllSearchedPosts = async (searchTerm = "") => {
   try {
     const token = cookies().get("accessToken")?.value;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts?searchTerm=${encodeURIComponent(searchTerm)}`, {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-        "Content-Type": "application/json",
-      },
-      next: {
-        tags: ["POST"],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/posts?searchTerm=${encodeURIComponent(searchTerm)}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["POST"],
+        },
+      }
+    );
     const data = await res.json();
 
     return data;
@@ -81,8 +90,6 @@ export const getAllSearchedPosts = async (searchTerm = "") => {
     throw new Error(error);
   }
 };
-
-
 
 export const getOfMyPosts = async () => {
   try {
