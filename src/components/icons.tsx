@@ -219,7 +219,7 @@ export const EyeIcon: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -245,7 +245,7 @@ export const MessageCircle: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -266,7 +266,7 @@ export const Bookmark: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -287,7 +287,7 @@ export const MoreIcon: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -308,7 +308,7 @@ export const LikeIcon: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -329,7 +329,7 @@ export const DislikeIcon: React.FC<IconSvgProps> = (props) => {
 
   return (
     <svg
-      className="size-6"
+      className="size-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -383,6 +383,163 @@ export const WarningIcon: React.FC<IconSvgProps> = (props) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+      />
+    </svg>
+  );
+};
+
+export const MailIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="size-4 "
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+      />
+    </svg>
+  );
+};
+
+export const InIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-5"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+      />
+    </svg>
+  );
+};
+export const OutIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-5"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7.49 12 3.74 8.248m0 0 3.75-3.75m-3.75 3.75h16.5V19.5"
+      />
+    </svg>
+  );
+};
+
+export const LocationIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-5 "
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+      />
+    </svg>
+  );
+};
+
+export const DeviceIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor "
+      className="size-5 "
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z"
+      />
+    </svg>
+  );
+};
+
+export const TimeIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-5 "
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+    </svg>
+  );
+};
+
+export const UserIcon: React.FC<IconSvgProps> = (props) => {
+  const { width, height = 40 } = props;
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="size-5 "
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
       />
     </svg>
   );

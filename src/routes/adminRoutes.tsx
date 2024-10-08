@@ -41,28 +41,15 @@ export const adminRoutes: TDashboarRoutes[] = [
     ],
   },
   {
-    label: 'Payment Management',
+    label: 'History Management',
     children: [
+      {
+        label: 'Login History',
+        path: '/admin-dashboard/login-history',
+      },
       {
         label: 'Payment History',
         path: '/admin-dashboard/payment-history',
-      },
-      {
-        label: 'User Subscriptions',
-        path: '/admin-dashboard/user-subscriptions',
-      },
-    ],
-  },
-  {
-    label: 'Analytics & Reporting',
-    children: [
-      {
-        label: 'User Activity',
-        path: '/admin-dashboard/user-activity',
-      },
-      {
-        label: 'Content Engagement',
-        path: '/admin-dashboard/content-engagement',
       },
 
     ],

@@ -24,7 +24,9 @@ const SidebarWrapper = () => {
   return (
     <motion.aside
       animate={{ width: isCollapsed ? "3rem" : "20rem" }}
-      className={`${isCollapsed ? 'h-11 sm:min-h-screen' : 'min-h-screen'} ms:from-[#000] bg-gradient-to-b from-[#ffff] to-[#ebebebe5] dark:from-[#000] dark:to-[#272727] rounded-tl-lg p-3 pt-3 z-[99] md:sticky  fixed top-2 left-1`}
+      className={`${isCollapsed ? 'h-11 sm:min-h-screen sm:h-screen' : ' min-h-screen'} ms:from-[#000] bg-gradient-to-b from-[#ffff] to-[#ebebebe5] dark:from-[#000] dark:to-[#272727] rounded-tl-lg p-3 pt-3 z-[99] md:sticky  fixed top-2 left-1 sm:h-screen sm:sticky sm:top-0
+         md:top-0 lg:sticky lg:top-0 
+        md:h-[100vh] lg:h-[100vh]`}
       initial={{ width: "20rem" }}
       style={{ overflow: "hidden" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -50,3 +52,7 @@ const SidebarWrapper = () => {
 
 
 export default SidebarWrapper;
+
+
+
+

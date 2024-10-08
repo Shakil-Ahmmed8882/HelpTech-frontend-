@@ -10,15 +10,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primaryColor: "#239DDF",
-        darkColor: "#22272E"
+        primaryColor: "#239DDF",  // Custom primary color
+        darkColor: "#22272E",      // Custom dark color
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        mono: ["var(--font-mono)"],
+        sans: ["var(--font-sans)"], // Custom sans font
+        mono: ["var(--font-mono)"],   // Custom mono font
       },
     },
   },
-  darkMode: "class",
-  plugins: [nextui()],
+  darkMode: "class", // Enable dark mode using a class
+  plugins: [
+    nextui(), // Add NextUI plugin for Tailwind
+  ],
 };

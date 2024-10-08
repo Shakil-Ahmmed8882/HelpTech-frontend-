@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { cookies } from "next/headers";
 import GitHubProvider from "next-auth/providers/github";
 import axiosInstance from "../lib/AxiosInstance";
+import { createLoginLogoutHistory } from "../services/login-history";
 
 
 
@@ -45,6 +46,7 @@ export const AuthOptions: NextAuthOptions = {
                 ) {
                     cookies().set("accessToken", response.data.data.accessToken);
                     cookies().set("refreshToken", response.data.data.refreshToken);
+                    await createLoginLogoutHistory({actionType: "login"})
                     return true;
                 } else {
                     return false;
@@ -63,8 +65,10 @@ export const AuthOptions: NextAuthOptions = {
                     response.data.data.accessToken ||
                     response.data.data.refreshToken
                 ) {
+
                     cookies().set("accessToken", response.data.data.accessToken);
                     cookies().set("refreshToken", response.data.data.refreshToken);
+                    await createLoginLogoutHistory({actionType: "login"})
                     return true;
                 } else {
                     return false;

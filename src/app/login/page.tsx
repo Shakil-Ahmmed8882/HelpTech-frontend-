@@ -23,12 +23,15 @@ const LoginPage = () => {
   const router = useRouter();
   const { setIsLoading: userLoading } = useUser();
   const redirect = searchParams.get("redirect");
-  const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
-
+  const { mutate: handleUserLogin, isPending, isSuccess} = useUserLogin();
+  
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleUserLogin(data);
     userLoading(true);
+
   };
+
+
 
   useEffect(() => {
     if (!isPending && isSuccess) {

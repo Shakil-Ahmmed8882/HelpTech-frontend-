@@ -7,7 +7,7 @@ export const SidebarMenu = ({ routes, isCollapsed }: { routes: TDashboarRoutes[]
   return (
     <motion.div
       animate={{ opacity: isCollapsed ? 0 : 1 }}
-      className={` h-full w-64 shadow-lg  transition-transform duration-500 ${isCollapsed ? 'transform translate-x-full' : 'transform translate-x-0'}`}
+      className={` h-full w-64 shadow-lg pr-4  transition-transform duration-500 ${isCollapsed ? 'transform translate-x-full' : 'transform translate-x-0'}`}
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
@@ -20,12 +20,12 @@ export const SidebarMenu = ({ routes, isCollapsed }: { routes: TDashboarRoutes[]
             transition={{ duration: 0.3 }}
           >
             {route.children ? (
-              <Accordion className="">
+              <Accordion >
                 <AccordionItem
                   className={`transition-all duration-500 ease-in-out ${isCollapsed ? 'max-h-0 opacity-0 overflow-hidden' : 'max-h-[500px] opacity-100'}`}
                   title={route.label}
                 >
-                  <ul className={`pl-2 p-2 rounded-b-lg`}>
+                  <ul className={`pl-3 p-2 rounded-b-lg`}>
                     {route.children.map((child: TItem) => (
                       <motion.li
                         key={child.path}
