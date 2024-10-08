@@ -12,7 +12,7 @@ import { IComment } from "@/src/types";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader } from "@nextui-org/card";
-import { Textarea } from "@nextui-org/input";
+import { Input, Textarea } from "@nextui-org/input";
 import { useRef, useState } from "react";
 import CommentSkeleton from "./CommentSkeleton";
 
@@ -55,7 +55,7 @@ export default function Comment({
       <Card
         className={`${
           showComment
-            ? " z-[99] opacity-100 translate-x-0 visible"
+            ? " opacity-100 min-h-screen relative z-[99999] translate-x-0 visible"
             : "z-[-99] opacity-0 translate-x-80 invisible"
         } fixed top-0 right-0 h-screen p-3 w-[400px] overflow-auto shadow-lg transition-all duration-300`}
       >
@@ -130,32 +130,138 @@ export default function Comment({
   );
 }
 
+// const IndividualComment = ({ comment }: { comment: IComment }) => {
+//   return (
+//     <div className="space-y-2 pt-5">
+//       <div className="flex items-start space-x-4">
+//         <Avatar className="h-10 w-10" name="SL" />
+//         <div className="flex-1 space-y-1">
+//           <div className="flex items-center justify-between">
+//             <p className="font-semibold">{comment?.user?.username}</p>
+//             <div className="flex items-center space-x-1">
+//               <p className="text-sm text-default-500">3 days ago</p>
+//             </div>
+//           </div>
+//           <p className="text-sm pt-2 text-default-500">{comment?.comment}</p>
+//           <div className="flex items-center space-x-4 pt-8 justify-end w-full">
+//             <div className="flex items-center space-x-1">
+//               <span className="text-sm font-medium">7</span>
+//             </div>
+//             <Button className="h-auto p-0 text-sm" variant="bordered">
+//               1 reply
+//             </Button>
+//             <Button className="h-auto p-0 text-sm" variant="bordered">
+//               Reply
+//             </Button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+
 const IndividualComment = ({ comment }: { comment: IComment }) => {
+  // State to manage reply input visibility and showing existing reply
+  const [showReplyInput, setShowReplyInput] = useState(false);
+  const [showReply, setShowReply] = useState(false);
+  const [reply, setReply] = useState<string>(''); // Stores the reply input
+
+  // Handles toggling reply input visibility
+  const handleReplyClick = () => {
+    setShowReplyInput(!showReplyInput);
+  };
+
+  // Handles toggling the visibility of the static reply
+  const handleViewReplyClick = () => {
+    setShowReply(!showReply);
+  };
+
+  // Handles the submission of the reply (for now just logs it)
+  const handleReplySubmit = () => {
+    console.log('Reply:', reply);
+    setReply(''); // Clears the input after submitting
+    setShowReplyInput(false); // Hides the input field after reply is submitted
+  };
+
   return (
-    <div className="space-y-2 pt-5">
-      <div className="flex items-start space-x-4">
-        <Avatar className="h-10 w-10" name="SL" />
-        <div className="flex-1 space-y-1">
+    <div className="space-y-3 pt-4">
+      <div className="flex items-start space-x-3">
+        <Avatar className="h-8 w-8" name={comment?.user?.username} />
+        <div className="flex-1 bg-default-50 p-3 rounded-lg shadow-sm">
           <div className="flex items-center justify-between">
-            <p className="font-semibold">{comment?.user?.username}</p>
-            <div className="flex items-center space-x-1">
-              <p className="text-sm text-default-500">3 days ago</p>
-            </div>
+            <p className="font-semibold text-default-600 text-sm">
+              {comment?.user?.username}
+            </p>
+            <div className="text-xs text-gray-400">3 days ago</div>
           </div>
-          <p className="text-sm pt-2 text-default-500">{comment?.comment}</p>
-          <div className="flex items-center space-x-4 pt-8 justify-end w-full">
-            <div className="flex items-center space-x-1">
-              <span className="text-sm font-medium">7</span>
+          <p className="text-default-600 text-sm pt-1">{comment?.comment}</p>
+
+          <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center space-x-1 text-xs ">
+              <span>Like</span>
+              <span>•</span>
+              <span
+                className="cursor-pointer text-default-900"
+                onClick={handleReplyClick}
+              >
+                Reply
+              </span>
+              <span>•</span>
+              <span>7 likes</span>
             </div>
-            <Button className="h-auto p-0 text-sm" variant="bordered">
-              1 reply
-            </Button>
-            <Button className="h-auto p-0 text-sm" variant="bordered">
-              Reply
+            <Button
+              className="h-auto p-0 border-none text-xs text-[#35f435c3]"
+              variant="ghost"
+              onClick={handleViewReplyClick}
+            >
+              {showReply ? 'Hide reply' : 'View 1 reply'}
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Reply Input Field */}
+      {showReplyInput && (
+        <div className="pl-10 pt-2 ">
+          <Input
+            type="text"
+            value={reply}
+            onChange={(e) => setReply(e.target.value)}
+            className="w-full border border-gray-300 p-2 rounded-lg"
+            placeholder="Write a reply..."
+          />
+          <button
+            onClick={handleReplySubmit}
+            className="mt-4 bg-primaryColor  text-white px-4 py-1 rounded-full"
+          >
+            Submit
+          </button>
+        </div>
+      )}
+
+      {/* Static reply shown on "View 1 reply" */}
+      {showReply && (
+        <div className="pl-10">
+          <div className="flex items-start space-x-2 pt-2">
+            <Avatar className="h-7 w-7" name="Jane Doe" />
+            <div className="flex-1 bg-default-50 p-2 rounded-lg shadow-sm">
+              <div className="flex items-center justify-between">
+                <p className="font-semibold text-default-600 text-xs">
+                  Jane Doe
+                </p>
+                <div className="text-xs text-gray-400">1 day ago</div>
+              </div>
+              <p className="text-default-600 text-xs pt-1">
+                Thanks for sharing your thoughts! I totally agree with what you said.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+

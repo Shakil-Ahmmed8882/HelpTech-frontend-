@@ -45,7 +45,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // if try to go route startwith post without login redirect 
+  // // if try to go route startwith post without login redirect 
   // first to login then let user go 
   if (user && user?.role) {
     const routes = generalProtectedRoutes[user?.role as Role];

@@ -9,7 +9,7 @@ import { Button } from "@nextui-org/button";
 const LoginDemo = () => {
   return (
     <Container>
-      <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-3">
+      <div className="flex flex-col-reverse -mt-11 md:flex-row justify-center min-h-screen items-center gap-3">
         <div className="w-full md:w-2/4 flex flex-col justify-center items-start space-y-4">
           <h2 className="text-4xl md:text-5xl leading-[40px] md:leading-[60px] font-bold">
             Sign In to Unlock Exclusive Content

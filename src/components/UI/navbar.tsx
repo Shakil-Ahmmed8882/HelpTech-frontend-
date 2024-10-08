@@ -22,7 +22,7 @@ import { NotificationIcon, WriteIcon } from "@/src/assets/icons";
 import { Input } from "@nextui-org/input";
 import { useEffect, useRef, useState } from "react";
 import { useGetAllSearchedPosts } from "@/src/hooks/post.hook";
-import { SearchResults } from "./navbar/SearchResults";
+import { SearchResults } from "./navigation/navbar/SearchResults";
 import useClickOutside from "@/src/hooks";
 
 export const Navbar = () => {
