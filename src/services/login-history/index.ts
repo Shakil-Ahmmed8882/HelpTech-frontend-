@@ -1,9 +1,8 @@
 "use server";
 
 import axiosInstance from "@/src/lib/AxiosInstance";
-import { IPost } from "@/src/types";
 import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
+
 
 export const createLoginLogoutHistory = async (actionType: {
   actionType: string;
@@ -36,74 +35,18 @@ export const getAllLoginAndOutHistories = async (searchTerm: string) => {
   }
 };
 
-
-// =============================================================
-
-export const getAllSearchedPosts = async (searchTerm = "") => {
+// Fetch all posts, optionally filtered by category
+export const getAllLoginAndOutHistoriesOfSingleUser = async (searchTerm: string) => {
   try {
-    const token = cookies().get("accessToken")?.value;
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/posts?searchTerm=${encodeURIComponent(searchTerm)}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["POST"],
-        },
-      }
-    );
-    const data = await res.json();
-
-    return data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-};
-
-export const getOfMyPosts = async () => {
-  try {
-    const token = cookies().get("accessToken")?.value;
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/posts/my-posts`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["POST"],
-        },
-      }
-    );
-    const data = await res.json();
-
-    return data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-};
-
-export const getSinglePost = async (id: string): Promise<{ data: IPost }> => {
-  try {
-    const token = cookies().get("accessToken")?.value;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `${token}`,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-      next: {
-        tags: ["POST"],
-      },
+    const { data } = await axiosInstance.get("/login/logout-histories/single-user", {
+      params: { searchTerm },
     });
-    const data = await res.json();
+
+
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(`Failed to fetch login/logout histories: ${error?.message || error}`);
   }
 };
+
+

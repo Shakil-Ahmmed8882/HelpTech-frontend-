@@ -7,8 +7,25 @@ export const adminRoutes: TDashboarRoutes[] = [
     path: '/admin-dashboard/',
   },
   {
-    label: 'Profile',
-    path: '/admin-dashboard/profile',
+    label: 'Profile Management',
+    children: [
+      {
+        label: 'Profile',
+        path: '/admin-dashboard/profile',
+      },
+      {
+        label: 'Edit Profile',
+        path: '/admin-dashboard/edit-profile',
+      },
+      {
+        label: 'Change Password',
+        path: '/admin-dashboard/change-password',
+      },
+      {
+          label: 'Following',
+          path: '/admin-dashboard/followings-followers',
+        },
+    ],
   },
   {
     label: 'User Management',

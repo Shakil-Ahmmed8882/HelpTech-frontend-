@@ -12,13 +12,13 @@ import {
 import { format, parseISO } from "date-fns";
 import { DeviceIcon, InIcon, LocationIcon, MailIcon, OutIcon, SearchIcon, TimeIcon, UserIcon } from "@/src/components/icons";
 import { Input } from "@nextui-org/input";
-import { useGetAllLoginAndOutHistories } from "@/src/hooks/login.logout.hitory..hook";
+import { useGetAllLoginAndOutHistoriesOfSingleUser } from "@/src/hooks/login.logout.hitory..hook";
 import { ILoginHistory } from "@/src/types/history.type";
 import debounce from "lodash/debounce"; 
 
 export default function LoginHistoryTable() {
   const [searchTerm, setSearchTerm] = useState(""); 
-  const { data, refetch } = useGetAllLoginAndOutHistories(searchTerm); 
+  const { data, refetch } =  useGetAllLoginAndOutHistoriesOfSingleUser(searchTerm)
 
   const loginLogoutHistoryData: ILoginHistory[] = data?.data || [];
 

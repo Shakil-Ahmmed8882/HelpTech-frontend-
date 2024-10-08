@@ -1,14 +1,19 @@
+import useClickOutside from "@/src/hooks";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface SearchResultProps {
   results: Array<{ _id: string; title: string; images: string[] }>;
+  searchResultRef: React.RefObject<HTMLDivElement>;
 }
 
-export const SearchResults = ({ results }: SearchResultProps) => {
+
+
+export const SearchResults = ({ results , searchResultRef}: SearchResultProps) => {
   return (
     <motion.div
-      className="w-1/2 mt-4 p-4 absolute left-80 top-11 bg-default-50 rounded-lg shadow-lg"
+      ref={searchResultRef}
+      className="w-1/2 mt-4 p-4 absolute overflow-y-auth overflow-x-hidden left-80 top-11 bg-default-50 rounded-lg shadow-lg"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
@@ -39,3 +44,5 @@ export const SearchResults = ({ results }: SearchResultProps) => {
     </motion.div>
   );
 };
+
+

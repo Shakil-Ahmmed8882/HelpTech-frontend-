@@ -1,14 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
-  createPost,
+  
   deletePost,
-  getAllPosts,
   getAllSearchedPosts,
   getOfMyPosts,
   getSinglePost,
   updatePost,
 } from "../services/post";
-import { getAllLoginAndOutHistories } from "../services/login-history";
+import { getAllLoginAndOutHistories, getAllLoginAndOutHistoriesOfSingleUser } from "../services/login-history";
 
 
 
@@ -19,6 +18,18 @@ export const useGetAllLoginAndOutHistories = (searchTerm: string) => {
     queryKey: ["LOGIN_LOGOUT_HISTORY", searchTerm], // Include searchTerm in query key
     queryFn: async () => {
       const response = await getAllLoginAndOutHistories(searchTerm);
+      return response;
+    },
+    enabled: !!searchTerm, // Only fetch if searchTerm is truthy
+  });
+};
+
+
+export const useGetAllLoginAndOutHistoriesOfSingleUser = (searchTerm: string) => {
+  return useQuery({
+    queryKey: ["LOGIN_LOGOUT_SINGLE_HISTORY", searchTerm],
+    queryFn: async () => {
+      const response = await getAllLoginAndOutHistoriesOfSingleUser(searchTerm);
       return response;
     },
     enabled: !!searchTerm, // Only fetch if searchTerm is truthy

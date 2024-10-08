@@ -21,10 +21,12 @@ import { useGetAllPaymentHistories, useGetAllPaymentHistoriesOfSingleUser } from
 
 export default function PaymentHistoryTable() {
   const [searchTerm, setSearchTerm] = useState("");
-  const { data,refetch } = useGetAllPaymentHistories(searchTerm);
+  const { data,refetch } = useGetAllPaymentHistoriesOfSingleUser(searchTerm);
 
   const paymentHistoryData = data?.data || []
-
+  
+  
+  // Function to format the createdAt date
   const formatDate = (dateString: string) => {
     const date = parseISO(dateString); // Parse ISO date string
     return format(date, "EEEE 'at' hh:mm a"); // Format to "Friday at 10:00 AM"

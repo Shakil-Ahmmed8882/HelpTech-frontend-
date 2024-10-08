@@ -52,8 +52,17 @@ export const userRoutes: TDashboarRoutes[] = [
       path: '/user-dashboard/news-feed',
     },
     {
-      label: 'Premium Content',
-      path: '/user-dashboard/premium-contents',
+      label: 'History Management',
+      children: [
+        {
+          label: 'Login/Logout Activity',
+          path: '/user-dashboard/login-logout-history',
+        },
+        {
+          label: 'Payment History',
+          path: '/user-dashboard/payment-history',
+        },
+      ],
     },
     {
       label: 'Settings',

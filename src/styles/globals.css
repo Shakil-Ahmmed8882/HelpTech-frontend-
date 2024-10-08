@@ -4,3 +4,23 @@
 
 
 
+
+/* Scroll bar */
+ /* width */
+ ::-webkit-scrollbar {
+    width: 5px;
+ }
+/* Track */
+ ::-webkit-scrollbar-track {
+background: #239ddf27;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: #239ddf5c;
+}
+
+/* Handle on hover */
+ ::-webkit-scrollbar-thumb:hover {
+    background: #239ddf5c;
+}
