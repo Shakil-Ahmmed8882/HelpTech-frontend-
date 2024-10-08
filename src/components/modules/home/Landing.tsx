@@ -1,12 +1,13 @@
 "use client";
 
+import not_found_image from "@/src/assets/images/general/404.png"
+
 export default function Landing() {
   const { user, isLoading: isUserLoading } = useUser();
   const params = useSearchParams();
   const category = params.get("category");
   const { data, isLoading } = useGetAllPosts(`${category}`);
-  const allPosts = data?.data || []
-
+  const allPosts = data?.data || [];
 
   return (
     <>
@@ -24,10 +25,12 @@ export default function Landing() {
                   <Category /> {/* Static content */}
                   {isLoading ? (
                     <PostHorizontalSkeleton /> // Only the post section will show a skeleton
-                  ) : (
-                    allPosts?.map((post: IPost) => (
+                  ) : allPosts.length > 0 ? (
+                    allPosts.map((post: IPost) => (
                       <Post key={post._id} post={post} />
                     ))
+                  ) : (
+                    <Image className="dark:opacity-30 ml-20 -mt-8" width={500} height={500} alt="404" src={not_found_image}/>
                   )}
                 </section>
 
@@ -64,4 +67,5 @@ import LoginDemo from "./_components/LoginDemo";
 import { useUser } from "@/src/context/user.provider";
 import { useSearchParams } from "next/navigation";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";import Image from "next/image";
+

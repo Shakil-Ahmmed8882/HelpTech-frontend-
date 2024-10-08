@@ -82,7 +82,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       {/* Search Input using basic useState */}
-      <div ref={searchResultRef} className="w-1/2">
+      <div ref={searchResultRef} className="hidden md:flex w-1/2">
         <Input
           value={searchValue} // Controlled input value
           onChange={handleSearchChange} // Handle input change
@@ -91,7 +91,7 @@ export const Navbar = () => {
         />
       </div>
 
-      <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
+      <NavbarContent className="flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="hidden sm:flex gap-4 items-center">
           <Link className="text-default-600" href="/write">
             <WriteIcon />
@@ -99,8 +99,14 @@ export const Navbar = () => {
           <NotificationIcon />
           <ThemeSwitch />
         </NavbarItem>
-        {user ? (
-          <NavbarItem className="hidden sm:flex gap-2">
+        
+      </NavbarContent>
+      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <ThemeSwitch />
+        <NavbarMenuToggle />
+      </NavbarContent>
+      {user ? (
+          <NavbarItem className="flex justify-end gap-2">
             <NavbarDropdown />
           </NavbarItem>
         ) : (
@@ -110,12 +116,6 @@ export const Navbar = () => {
             </Link>
           </NavbarItem>
         )}
-      </NavbarContent>
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (

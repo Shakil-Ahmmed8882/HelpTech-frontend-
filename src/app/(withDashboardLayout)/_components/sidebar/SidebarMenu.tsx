@@ -1,9 +1,14 @@
+"use"
 import { TItem, TDashboarRoutes } from "@/src/routes/userRoutes";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Button } from "@nextui-org/button";
+import { logout } from "@/src/services/authService";
+import LogoutButton from "./LogoutButton";
 
 export const SidebarMenu = ({ routes, isCollapsed }: { routes: TDashboarRoutes[], isCollapsed: boolean }) => {
+
   return (
     <motion.div
       animate={{ opacity: isCollapsed ? 0 : 1 }}
@@ -58,6 +63,7 @@ export const SidebarMenu = ({ routes, isCollapsed }: { routes: TDashboarRoutes[]
           </motion.li>
         ))}
       </ul>
+      <LogoutButton/>
     </motion.div>
   );
 };

@@ -79,9 +79,5 @@ export const adminRoutes: TDashboarRoutes[] = [
         path: '/admin-dashboard/activity-logs',
       },
     ],
-  },
-  {
-    label: 'Logout',
-    path: '/logout',
-  },
+  }
 ];

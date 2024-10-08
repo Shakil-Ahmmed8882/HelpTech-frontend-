@@ -27,10 +27,16 @@ export function Post({ post }: { post: IPost }) {
               <h2 className="text-md">{author?.username}</h2>
             </div>
           </CardHeader>
-          <p className="">{category}</p>
+          
           <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
             <div className="space-y-4 md:w-2/3">
+              <div className="flex items-center gap-3">
               <h1 className="text-2xl font-bold">{title}</h1>
+              <div className="bg-gradient-to-tr from-[#df23a0] to-[#36b8ff] rounded-full">
+              <p className=" dark:bg-black bg-white rounded-full m-[1px] px-3 p-1  text-sm">{category}</p>
+
+              </div>
+              </div>
               <div
                 dangerouslySetInnerHTML={{ __html: content }}
                 className="text-default-500 text-lg"

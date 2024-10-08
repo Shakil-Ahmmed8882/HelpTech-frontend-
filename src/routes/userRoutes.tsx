@@ -76,10 +76,6 @@ export const userRoutes: TDashboarRoutes[] = [
           path: '/user-dashboard/notification-settings',
         },
       ],
-    },
-    {
-      label: 'Logout',
-      path: '/logout',
-    },
+    }
   ];
   

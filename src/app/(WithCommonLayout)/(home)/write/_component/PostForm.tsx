@@ -78,7 +78,7 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
 
   return (
     <>
-      <HTModal buttonClassName="bg-primaryColor" buttonText="Write post" title="Create post">
+      <HTModal buttonClassName="bg-primaryColor !text-white" buttonText="Write post" title="Create post">
         {createPostPending && <Loading />}
         <div className="h-full rounded-xl py-12">
           <h1 className="text-2xl font-semibold">Add your post</h1>
@@ -166,8 +166,12 @@ export default function CreatePost({redirect}:{redirect:string | undefined}) {
 
 const categoryOptions = [
   { label: "Technology", key: "Technology" },
+  { label: "Software", key: "Software" },
   { label: "Health", key: "Health" },
-  { label: "Travel", key: "Travel" },
+  { label: "Mindfulness", key: "Mindfulness" },
+  { label: "Startups", key: "Startups" },
+  { label: "Productivity", key: "Productivity" },
+  { label: "Entrepreneurship", key: "Entrepreneurship" }
 ];
 
 const isPremiumOptions = [
@@ -176,7 +180,11 @@ const isPremiumOptions = [
 ];
 
 const tagOptions = [
-  { label: "Food", key: "Food" },
+  { label: "Technology", key: "Technology" },
+  { label: "Software", key: "Software" },
   { label: "Health", key: "Health" },
-  { label: "Travel", key: "Travel" },
+  { label: "Mindfulness", key: "Mindfulness" },
+  { label: "Startups", key: "Startups" },
+  { label: "Productivity", key: "Productivity" },
+  { label: "Entrepreneurship", key: "Entrepreneurship" }
 ];

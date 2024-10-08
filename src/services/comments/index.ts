@@ -30,8 +30,10 @@ export const getAllCommmentsOnSiglePost = async (
           Authorization: `${token}`,
           "Content-Type": "application/json",
         },
+        cache:"no-store", 
         next: {
           tags: ["COMMENTS"],
+          revalidate:2
         },
       }
     );
