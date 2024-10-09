@@ -11,7 +11,7 @@ export default function Landing() {
 
   return (
     <>
-      <div className="min-h-screen ">
+      <div className=" ">
         {/* Handle user loading state */}
         {isUserLoading ? (
           <HomeLayoutSkeleton />
@@ -67,5 +67,5 @@ import LoginDemo from "./_components/LoginDemo";
 import { useUser } from "@/src/context/user.provider";
 import { useSearchParams } from "next/navigation";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
-import { useEffect, useState } from "react";import Image from "next/image";
+import Image from "next/image";
 

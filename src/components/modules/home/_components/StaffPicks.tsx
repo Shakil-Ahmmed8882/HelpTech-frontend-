@@ -80,8 +80,10 @@ const StaffPicks = () => {
         >
           See more..
         </Link>
-  
-        {/* Recommended Topics */}
+
+        
+  {/* <>
+     
         <h4 className="text-lg font-semibold text-default-800 mt-6 mb-3">
           Recommended topics
         </h4>
@@ -98,16 +100,17 @@ const StaffPicks = () => {
           >
             Bitcoin
           </Link>
-          {/* Add more tags as needed */}
+  
+  
         </div>
   
         <div>
           <main className="max-w-6xl mx-auto w-full gap-4 relative">
-            {/* Main content section displaying posts */}
+            
             <section className=" relative min-h-screen p-4">
               <h1 className="text-3xl font-bold mb-6">Latest Tech Posts</h1>
               <div className="grid grid-cols-1 gap-6">
-                {/* Loop through posts dynamically */}
+                
                 <div className="border-b border-default-200 pb-8">
                   <h2 className="text-xl  font-semibold">
                     Understanding JavaScript Closures
@@ -132,11 +135,11 @@ const StaffPicks = () => {
                     Read more →
                   </Link>
                 </div>
-                {/* Add more posts here */}
+                
               </div>
             </section>
   
-            {/* Sidebar with recommendations and trending tech tips */}
+            
             <aside className="border-l border-[#373737] p-4  min-h-screen sticky top-0 ">
               <div className="mb-6">
                 <h2 className="text-3xl font-bold text-default-800 mb-4">
@@ -156,7 +159,7 @@ const StaffPicks = () => {
                 </div>
               </div>
   
-              {/* Trending Topics Section */}
+              
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-default-800 mb-4">
                   Trending Tech Topics
@@ -183,7 +186,7 @@ const StaffPicks = () => {
                 </ul>
               </div>
   
-              {/* Newsletter Subscription Widget */}
+              
               <div className="bg-default-50 shadow-sm p-4 rounded-lg mb-6">
                 <h3 className="text-lg font-semibold text-default-800 mb-4">
                   Stay Updated
@@ -204,7 +207,7 @@ const StaffPicks = () => {
                 </form>
               </div>
   
-              {/* Social Media Links */}
+              
               <div className="bg-default-50 shadow-sm p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-default-800 mb-2">
                   Follow Us
@@ -218,6 +221,8 @@ const StaffPicks = () => {
             </aside>
           </main>
         </div>
+  
+  </> */}
       </div>
     );
   };
