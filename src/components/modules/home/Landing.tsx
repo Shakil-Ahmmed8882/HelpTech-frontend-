@@ -11,7 +11,7 @@ export default function Landing() {
 
   return (
     <>
-      <div>
+      <div className="min-h-screen ">
         {/* Handle user loading state */}
         {isUserLoading ? (
           <HomeLayoutSkeleton />
@@ -20,7 +20,7 @@ export default function Landing() {
         ) : (
           <>
             <Container>
-              <main className="md:flex max-w-6xl mx-auto w-full gap-4 relative">
+              <main className="md:flex max-w-6xl mx-auto w-full  relative">
                 <section className="md:w-[65%] relative min-h-screen">
                   <Category /> {/* Static content */}
                   {isLoading ? (

@@ -32,6 +32,7 @@ export default function Comment({
   const { user } = useUser();
   const postComments = data?.data || [];
   const commentSectionRef = useRef(null);
+
   useClickOutside(commentSectionRef, () => setShowComment(false));
 
   const [commentText, setCommentText] = useState("");
@@ -83,7 +84,7 @@ export default function Comment({
             </CardHeader>
             <div className="space-y-4">
               <div className="flex items-start p-4 rounded-lg space-x-4 bg-default-100">
-                <Avatar className="h-10 w-10" />
+                <Avatar className="h-10 w-10" src={user?.profilePhoto} />
                 <div className="flex-1 space-y-2">
                   <p className="font-semibold">{user?.username}</p>
                   <Textarea
@@ -130,35 +131,7 @@ export default function Comment({
   );
 }
 
-// const IndividualComment = ({ comment }: { comment: IComment }) => {
-//   return (
-//     <div className="space-y-2 pt-5">
-//       <div className="flex items-start space-x-4">
-//         <Avatar className="h-10 w-10" name="SL" />
-//         <div className="flex-1 space-y-1">
-//           <div className="flex items-center justify-between">
-//             <p className="font-semibold">{comment?.user?.username}</p>
-//             <div className="flex items-center space-x-1">
-//               <p className="text-sm text-default-500">3 days ago</p>
-//             </div>
-//           </div>
-//           <p className="text-sm pt-2 text-default-500">{comment?.comment}</p>
-//           <div className="flex items-center space-x-4 pt-8 justify-end w-full">
-//             <div className="flex items-center space-x-1">
-//               <span className="text-sm font-medium">7</span>
-//             </div>
-//             <Button className="h-auto p-0 text-sm" variant="bordered">
-//               1 reply
-//             </Button>
-//             <Button className="h-auto p-0 text-sm" variant="bordered">
-//               Reply
-//             </Button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+
 
 
 
@@ -168,7 +141,7 @@ const IndividualComment = ({ comment }: { comment: IComment }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [reply, setReply] = useState<string>(''); // Stores the reply input
-
+  const {user} = useUser()
   // Handles toggling reply input visibility
   const handleReplyClick = () => {
     setShowReplyInput(!showReplyInput);
@@ -189,7 +162,7 @@ const IndividualComment = ({ comment }: { comment: IComment }) => {
   return (
     <div className="space-y-3 pt-4">
       <div className="flex items-start space-x-3">
-        <Avatar className="h-8 w-8" name={comment?.user?.username} />
+        <Avatar className="h-8 w-8" src={comment?.user?.profilePhoto} />
         <div className="flex-1 bg-default-50 p-3 rounded-lg shadow-sm">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-default-600 text-sm">
@@ -246,11 +219,11 @@ const IndividualComment = ({ comment }: { comment: IComment }) => {
       {showReply && (
         <div className="pl-10">
           <div className="flex items-start space-x-2 pt-2">
-            <Avatar className="h-7 w-7" name="Jane Doe" />
+            <Avatar src={user?.profilePhoto} className="h-7 w-7"  />
             <div className="flex-1 bg-default-50 p-2 rounded-lg shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-default-600 text-xs">
-                  Jane Doe
+                Shakil Ahmmed
                 </p>
                 <div className="text-xs text-gray-400">1 day ago</div>
               </div>

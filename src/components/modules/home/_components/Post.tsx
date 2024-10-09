@@ -28,7 +28,7 @@ export function Post({ post }: { post: IPost }) {
             </div>
           </CardHeader>
           
-          <section className="flex flex-col-reverse sm:flex-row justify-between gap-3">
+          <section className="flex flex-col-reverse md:flex-row justify-between gap-7">
             <div className="space-y-4 md:w-2/3">
               <div className="flex items-center gap-3">
               <h1 className="text-2xl font-bold">{title}</h1>

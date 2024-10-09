@@ -1,9 +1,9 @@
-import Container from "@/src/components/UI/Container";
+
 import { Skeleton } from "@nextui-org/skeleton";
 
 const PostSkeleton = () => {
   return (
-    <section className="max-w-3xl mx-auto">
+    <section className="max-w-3xl mx-auto min-h-screen">
       <Skeleton className="size-12  rounded-full mb-3 mt-5" />
       <Skeleton className="h-3 w-1/2  my-5" />
       <Skeleton className="w-2/3 h-6 mb-8" />
@@ -20,7 +20,7 @@ export default PostSkeleton;
 export const PostHorizontalSkeleton = () => {
   return (
     
-      <section className=" mx-auto sticky top-0 h-screen">
+      <section className=" mx-auto sticky top-0 min-h-screen h-screen">
         <main className="flex gap-3 w-full ">
           <div className="w-full">
             {/* 1 */}

@@ -24,6 +24,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGetAllSearchedPosts } from "@/src/hooks/post.hook";
 import { SearchResults } from "./navigation/navbar/SearchResults";
 import useClickOutside from "@/src/hooks";
+import Image from "next/image";
 
 export const Navbar = () => {
   const { user } = useUser();
@@ -44,7 +45,7 @@ export const Navbar = () => {
   // Use the click outside hook to clear search results and input value
   useClickOutside(searchResultRef, () => {
     setShowSearchResultBody(false);
-    setSearchValue(""); 
+    setSearchValue("");
   });
 
   useEffect(() => {
@@ -58,8 +59,8 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit ">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">HelpTech</p>
+            <Image alt="logo" width={40} height={40} src="/helpTechLogo.png" />{" "}
+            {/* Note the leading slash */}
           </NextLink>
         </NavbarBrand>
 
@@ -99,23 +100,25 @@ export const Navbar = () => {
           <NotificationIcon />
           <ThemeSwitch />
         </NavbarItem>
-        
       </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
       {user ? (
-          <NavbarItem className="flex justify-end gap-2">
-            <NavbarDropdown />
-          </NavbarItem>
-        ) : (
-          <NavbarItem className="hidden sm:flex gap-2">
-            <Link className="p-2 px-5 rounded-full bg-primaryColor text-white" href="/login">
-              Get started
-            </Link>
-          </NavbarItem>
-        )}
+        <NavbarItem className="flex justify-end gap-2">
+          <NavbarDropdown />
+        </NavbarItem>
+      ) : (
+        <NavbarItem className="hidden sm:flex gap-2">
+          <Link
+            className="p-2 px-5 rounded-full bg-primaryColor text-white"
+            href="/login"
+          >
+            Get started
+          </Link>
+        </NavbarItem>
+      )}
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
@@ -125,8 +128,8 @@ export const Navbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                      ? "danger"
+                      : "foreground"
                 }
                 href="#"
                 size="lg"
@@ -137,9 +140,11 @@ export const Navbar = () => {
           ))}
         </div>
       </NavbarMenu>
-      
+
       {/* Search Results Section */}
-      {showSearchResultBody && <SearchResults {...{searchResultRef}} results={searchResults} />}
+      {showSearchResultBody && (
+        <SearchResults {...{ searchResultRef }} results={searchResults} />
+      )}
     </NextUINavbar>
   );
 };

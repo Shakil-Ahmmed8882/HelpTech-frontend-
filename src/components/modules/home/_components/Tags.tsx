@@ -7,11 +7,11 @@ const categories = [
   { id: 1, name: "All", tag: "all" },
   { id: 1, name: "Technology", tag: "Technology" },
   { id: 2, name: "Software", tag: "Software" },
-  { id: 3, name: "Health", tag: "health" },
-  { id: 4, name: "Mindfulness", tag: "mindfulness" },
-  { id: 5, name: "Startups", tag: "startups" },
-  { id: 6, name: "Productivity", tag: "productivity" },
-  { id: 7, name: "Entrepreneurship", tag: "entrepreneurship" },
+  { id: 3, name: "Health", tag: "Health" },
+  { id: 4, name: "Mindfulness", tag: "Mindfulness" },
+  { id: 5, name: "Startups", tag: "Startups" },
+  { id: 6, name: "Productivity", tag: "Productivity" },
+  { id: 7, name: "Entrepreneurship", tag: "Entrepreneurship" },
 ];
 
 const Category = () => {

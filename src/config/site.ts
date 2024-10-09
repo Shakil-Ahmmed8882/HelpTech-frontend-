@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "HelpTech",
-  description: "Make beautiful websites regardless of your design experience.",
+  description: "HelpTech is your beautiful place grow your tech knowledge.",
   navItems: [
 
     {

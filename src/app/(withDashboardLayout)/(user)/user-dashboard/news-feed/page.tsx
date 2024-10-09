@@ -2,11 +2,9 @@
 
 import { PostHorizontalSkeleton } from "@/src/app/(WithCommonLayout)/(home)/post/[id]/_components/PostSkeleton";
 import { Post } from "@/src/components/modules/home/_components/Post";
-import Category from "@/src/components/modules/home/_components/Tags";
-import { useUser } from "@/src/context/user.provider";
 import { useGetAllPosts } from "@/src/hooks/post.hook";
 import { IPost } from "@/src/types";
-import { useSearchParams } from "next/navigation";
+
 
 const NewsfeedPage = () => {
   const { data, isLoading } = useGetAllPosts(`all`);

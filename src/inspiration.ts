@@ -1,0 +1,1 @@
+//https://www.linearloop.io/blog/supply-chain-software-development
