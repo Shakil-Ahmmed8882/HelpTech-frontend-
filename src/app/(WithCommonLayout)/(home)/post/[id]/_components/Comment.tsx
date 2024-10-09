@@ -219,11 +219,12 @@ const IndividualComment = ({ comment }: { comment: IComment }) => {
       {showReply && (
         <div className="pl-10">
           <div className="flex items-start space-x-2 pt-2">
-            <Avatar src={user?.profilePhoto} className="h-7 w-7"  />
+            <Avatar name={comment.user?.username !== user?.username? user?.username:"Rafi"} className="h-7 w-7"  />
             <div className="flex-1 bg-default-50 p-2 rounded-lg shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="font-semibold text-default-600 text-xs">
-                Shakil Ahmmed
+                
+                {comment.user?.username !== user?.username? user?.username:"Rafi"}
                 </p>
                 <div className="text-xs text-gray-400">1 day ago</div>
               </div>

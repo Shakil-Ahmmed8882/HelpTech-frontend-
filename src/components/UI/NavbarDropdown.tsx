@@ -45,13 +45,13 @@ export default function NavbarDropdown() {
           Dashboard
         </DropdownItem>
         <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard/profile":"/admin-dashboard/profile"}`)}>
-          Profile
+        Profile
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigation("/profile/settings")}>
-          Settings
+        <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard/followings-followers":"/admin-dashboard/followings-followers"}`)}>
+        Followers/Followings
         </DropdownItem>
-        <DropdownItem onClick={() => handleNavigation("/profile/create-post")}>
-          Create Post
+        <DropdownItem onClick={() => handleNavigation(`${user?.role === "user"? "/user-dashboard/login-logout-history":"/admin-dashboard/login-history"}`)}>
+          Login/logout activity
         </DropdownItem>
         <DropdownItem
           key="delete"

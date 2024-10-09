@@ -17,6 +17,7 @@ import GoogleLoginBtn from "@/src/components/UI/buttons/GoogleLoginBtn";
 import { Divider } from "@nextui-org/divider";
 import GithubLoginBtn from "@/src/components/UI/buttons/GithubLoginBtn";
 import Container from "@/src/components/UI/wrapper/Container";
+import Logo from "@/src/components/UI/Logo";
 
 const LoginPage = () => {
   const searchParams = useSearchParams();
@@ -50,7 +51,7 @@ const LoginPage = () => {
       {isPending && <Loading />}
       <Container>
         <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
-          <h3 className="my-2 text-2xl font-bold">Login with ProjectXYZ</h3>
+          <h3 className="my-2 text-2xl font-bold flex items-center  gap-3">Login with <Logo/></h3>
           <p className="mb-4 text-default-50">
             Welcome Back! Let&lsquo;s Get Started
           </p>
