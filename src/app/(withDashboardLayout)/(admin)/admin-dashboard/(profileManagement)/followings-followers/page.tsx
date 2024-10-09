@@ -1,10 +1,10 @@
-import App from "@/src/app/(withDashboardLayout)/_components/followingsAndFollowers/FollowingsAndFollowers";
+import FollowingsAndFollowers from "@/src/app/(withDashboardLayout)/_components/followingsAndFollowers/FollowingsAndFollowers";
 
 
 const FollowingAndFollowerspage = () => {
   return (
     <section>
-      <App/>
+      <FollowingsAndFollowers/>
     </section>
   );
 };
